@@ -1,11 +1,11 @@
-import { Button } from "@/client/components/Buttons"
+import { LinkButton } from "@/client/components/Buttons"
 import { Navigation } from "@/features/onboarding"
 import { SignUpWithGoogleButton } from "@/features/onboarding"
 
 function Auth() {
   return (
     <>
-      <header className="text-3xl text-primary_dark dark:text-primary mb-10">
+      <header className="text-3xl text-primary_dark dark:text-primary mb-10 text-center">
         Let&apos;s get you in
       </header>
 
@@ -14,7 +14,11 @@ function Auth() {
 
         <p>or</p>
 
-        <Button content="Sign in with password" variant="filled" />
+        <LinkButton
+          content="Sign in with password"
+          variant="filled"
+          link="auth/signin"
+        />
 
         <Navigation
           content="Don't have an account"

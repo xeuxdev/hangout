@@ -1,8 +1,8 @@
-import { Navigation, SignUpForm } from "@/features/onboarding"
+import { LoginForm, Navigation } from "@/features/onboarding"
 import Image from "next/image"
 import React from "react"
 
-function SignUp() {
+function SignIn() {
   return (
     <>
       <header className="space-y-8 pt-10 text-center">
@@ -13,22 +13,22 @@ function SignUp() {
           height={80}
           className="mx-auto"
         />
-        <p className="text-2xl font-bold">Create Your Account</p>
+        <p className="text-2xl font-bold">Login to Your Account</p>
       </header>
 
       <div className="mt-14 w-full">
-        <SignUpForm />
+        <LoginForm />
       </div>
 
       <div className="pb-5">
         <Navigation
-          content="Already have an account?"
-          route="/auth/signin"
-          cta="Sign in"
+          content="Don't have an account?"
+          route="/auth/signup"
+          cta="Sign up"
         />
       </div>
     </>
   )
 }
 
-export default SignUp
+export default SignIn

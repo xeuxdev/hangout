@@ -1,23 +1,26 @@
 "use client"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
+import { LoginType } from "../types"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { SignupSchema } from "../utils/Schema"
-import { SignUpType } from "../types"
-import { SubmitButton } from "@/client/components/Buttons"
+import { LoginSchema } from "../utils/Schema"
 import SignUpWithGoogleButton from "../components/SignUpWithGoogleButton"
+import { SubmitButton } from "@/client/components/Buttons"
+import { Modal } from "@mantine/core"
+import ForgotPassword from "./ForgotPassword"
 
-function SignUpForm() {
+function Login() {
   const [passwordType, setPasswordType] = useState<"password" | "text">(
     "password"
   )
+  const [openForgotPassword, setOpenForgotPassword] = useState(false)
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignUpType>({
-    resolver: zodResolver(SignupSchema),
+  } = useForm<LoginType>({
+    resolver: zodResolver(LoginSchema),
   })
 
   const handlePasswordToggle = () => {
@@ -26,10 +29,9 @@ function SignUpForm() {
       : setPasswordType("password")
   }
 
-  const onsubmit = (values: SignUpType) => {
+  const onsubmit = (values: LoginType) => {
     console.log(values)
   }
-
   return (
     <>
       <form onSubmit={handleSubmit(onsubmit)} className="space-y-7">
@@ -109,16 +111,37 @@ function SignUpForm() {
           </label>
         </div>
 
-        <SubmitButton content="Sign up" variant="filled" />
+        <SubmitButton content="Sign in" variant="filled" />
       </form>
+
+      <div className="my-5 text-center">
+        <p
+          className="text-purple-600 cursor-pointer"
+          onClick={() => {
+            setOpenForgotPassword(true)
+          }}
+        >
+          Forgot the password?
+        </p>
+      </div>
 
       <div className="my-7">
         <p className="text-center my-2">Or </p>
 
         <SignUpWithGoogleButton />
       </div>
+
+      <Modal
+        opened={openForgotPassword}
+        onClose={() => setOpenForgotPassword(false)}
+        title="Reset Password"
+        centered
+      >
+        {/* Modal content */}
+        <ForgotPassword />
+      </Modal>
     </>
   )
 }
 
-export default SignUpForm
+export default Login

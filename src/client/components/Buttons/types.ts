@@ -14,5 +14,6 @@ export type LinkButtonProps = React.FunctionComponent<
 
 // export interface EmptyButton extends GeneralButtonType {}
 export type ButtonType = React.FunctionComponent<
-  React.HTMLAttributes<HTMLButtonElement> & Omit<GeneralButtonType, "link">
+  React.ButtonHTMLAttributes<HTMLButtonElement> &
+    Omit<GeneralButtonType, "link">
 >
