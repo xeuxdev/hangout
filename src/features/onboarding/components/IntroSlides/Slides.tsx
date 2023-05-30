@@ -1,5 +1,5 @@
 "use client"
-import { Button } from "@/components/Buttons"
+import { Button } from "@/client/components/Buttons"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 

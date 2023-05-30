@@ -1,13 +1,11 @@
 "use client"
-import { Circles } from "@/components/UiElements"
+import { Circles } from "@/client/components/UiElements"
 import React, { useEffect, useState } from "react"
 import Slides from "./IntroSlides/Slides"
-import { useRouter } from "next/navigation"
 
 function OnBoarding() {
   const [activeSlide, setActiveSlide] = useState(0)
   const [showSlides, setShowSlides] = useState(false)
-  const router = useRouter()
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -18,12 +16,6 @@ function OnBoarding() {
       clearTimeout(timeout)
     }
   })
-
-  useEffect(() => {
-    if (activeSlide > 2) {
-      router.push("/auth")
-    }
-  }, [activeSlide, router])
 
   return (
     <>

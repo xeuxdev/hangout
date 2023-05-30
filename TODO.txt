@@ -1,0 +1,19 @@
+Meta info - Done
+put in each page - Done
+fonts
+- register {
+    redux?
+    reactQuery?
+    context?
+}
+
+forgotten password - done
+reset password - done
+
+next notifications
+- profile page next
+
+- when they want to create a campaign ask them for their full name / name of organization
+if they signed up as contributor they should put their full name
+
+
