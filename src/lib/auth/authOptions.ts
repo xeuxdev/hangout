@@ -1,6 +1,7 @@
 import { AuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
+import { Session } from "inspector"
 
 export const authOptions: AuthOptions = {
   session: {
@@ -10,8 +11,8 @@ export const authOptions: AuthOptions = {
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET,
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     // CredentialsProvider({
     //     name: 'Credentials',
@@ -38,6 +39,26 @@ export const authOptions: AuthOptions = {
     //     }
     //   })
   ],
+
+  callbacks: {
+    async jwt({ token, account, profile, user }) {
+      // Persist the OAuth access_token and or the user id to the token right after signin
+      if (account) {
+        token.accessToken = account.access_token
+        token.id = user?.id
+      }
+      return token
+    },
+    async session({ session, token }) {
+      // Send properties to the client, like an access_token and user id from a provider.
+      if (token) {
+        session.accessToken = token.accessToken
+        session.user.id = token.id
+      }
+
+      return session
+    },
+  },
   pages: {
     signIn: "/auth",
     //  newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
