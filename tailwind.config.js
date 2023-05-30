@@ -10,6 +10,8 @@ module.exports = {
         pri_btn: "#9610FF",
         sec_btn_bg: "#F5E7FF",
         sec_btn_text: "#AF48FF",
+        input_bg_dark: "#1F222A",
+        input_bg_light: "#FAFAFA",
 
         // colors
         gray_1: "#E0E0E0",
