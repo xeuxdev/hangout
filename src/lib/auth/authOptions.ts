@@ -1,13 +1,11 @@
 import { AuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { Session } from "inspector"
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import prisma from "../prisma"
 
 export const authOptions: AuthOptions = {
-  session: {
-    strategy: "jwt",
-    maxAge: 3 * 24 * 60 * 60,
-  },
+  adapter: PrismaAdapter(prisma),
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
@@ -40,12 +38,19 @@ export const authOptions: AuthOptions = {
     //   })
   ],
 
+  session: {
+    strategy: "jwt",
+    maxAge: 3 * 24 * 60 * 60,
+  },
+
   callbacks: {
     async jwt({ token, account, profile, user }) {
       // Persist the OAuth access_token and or the user id to the token right after signin
       if (account) {
         token.accessToken = account.access_token
         token.id = user?.id
+
+        console.log(token, "token")
       }
       return token
     },
@@ -55,6 +60,8 @@ export const authOptions: AuthOptions = {
         session.accessToken = token.accessToken
         session.user.id = token.id
       }
+
+      console.log(session, "session")
 
       return session
     },
