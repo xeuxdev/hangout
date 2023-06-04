@@ -8,7 +8,9 @@ function SignUpWithGoogleButton() {
     <button
       className="flex items-center justify-center gap-4 h-16 border border-gray_1 dark:border-[#33363D] dark:bg-input_bg_dark rounded-lg shadow-lg w-full"
       onClick={() => {
-        signIn("google")
+        signIn("google", {
+          callbackUrl: "/setup",
+        })
       }}
     >
       <Googleicon />

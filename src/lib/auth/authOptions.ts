@@ -1,11 +1,12 @@
 import { AuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import prisma from "../prisma"
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
+import clientPromise from "../db/mongodb"
 
 export const authOptions: AuthOptions = {
-  adapter: PrismaAdapter(prisma),
+  // adapter: PrismaAdapter(prisma),
+  adapter: MongoDBAdapter(clientPromise),
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
