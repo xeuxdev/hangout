@@ -1,3 +1,4 @@
+import { DB_INFO } from "@/constants/db"
 import { emailRegex, passwordRegex } from "@/constants/regex"
 import { AppResponse } from "@/lib/api/response"
 import clientPromise from "@/lib/db/mongodb"
@@ -5,8 +6,10 @@ import bcrypt from "bcrypt"
 import { NextResponse } from "next/server"
 
 export async function POST(request: Request) {
-  // await clientPromise
   const body = await request.json()
+  const client = await clientPromise
+  const db = client.db(DB_INFO.MAIN_DB)
+  const collection = db.collection(DB_INFO.USERS)
 
   if (!body) {
     return AppResponse("Please enter all fields.", 404)
@@ -18,18 +21,21 @@ export async function POST(request: Request) {
   if (!passwordRegex.test(body.password)) {
     return AppResponse("please enter a strong password", 400)
   }
+  const user = await collection.findOne({
+    email: body.email,
+  })
+  // .toArray()
 
-  // const hashedPassword = await bcrypt.hash(body.password, 12)
-  //
+  if (user) {
+    return AppResponse("user already exists", 400)
+  }
 
-  // const res = await
-  // const res = await prisma.user.create({
-  //   data: {
-  //     email: body.email,
-  //     password: hashedPassword,
-  //   },
-  // })
+  const hashedPassword = await bcrypt.hash(body.password, 12)
 
-  // return NextResponse.json({ res }, { status: 201 })
-  return NextResponse.json({ body }, { status: 201 })
+  const res = await collection.insertOne({
+    email: body.email,
+    password: hashedPassword,
+  })
+
+  return NextResponse.json({ res }, { status: 201 })
 }
