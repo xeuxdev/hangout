@@ -8,6 +8,7 @@ import SignUpWithGoogleButton from "../components/SignUpWithGoogleButton"
 import { SubmitButton } from "@/client/components/Buttons"
 import { Modal } from "@mantine/core"
 import ForgotPassword from "./ForgotPassword"
+import { signIn } from "next-auth/react"
 
 function Login() {
   const [passwordType, setPasswordType] = useState<"password" | "text">(
@@ -29,8 +30,15 @@ function Login() {
       : setPasswordType("password")
   }
 
-  const onsubmit = (values: LoginType) => {
+  const onsubmit = async (values: LoginType) => {
     console.log(values)
+    await signIn("credentials", {
+      email: values.email,
+      password: values.password,
+      redirect: false,
+    }).then((res) => {
+      console.log(res)
+    })
   }
   return (
     <>

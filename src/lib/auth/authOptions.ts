@@ -13,30 +13,33 @@ export const authOptions: AuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
-    // CredentialsProvider({
-    //     name: 'Credentials',
+    CredentialsProvider({
+      name: "Credentials",
 
-    //     credentials: {
-    //     //   username: { label: "Username", type: "text", placeholder: "jsmith" },
-    //     //   password: { label: "Password", type: "password" }
-    //     },
-    //     async authorize(credentials, req) {
+      // @ts-ignore
+      async authorize(
+        credentials: {
+          email: string
+          password: string
+        },
+        req
+      ) {
+        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/users/login`, {
+          method: "POST",
+          body: JSON.stringify(credentials),
+          headers: { "Content-Type": "application/json" },
+        })
+        const user = await res.json()
 
-    //       const res = await fetch("/your/endpoint", {
-    //         method: 'POST',
-    //         body: JSON.stringify(credentials),
-    //         headers: { "Content-Type": "application/json" }
-    //       })
-    //       const user = await res.json()
-
-    //       // If no error and we have user data, return it
-    //       if (res.ok && user) {
-    //         return user
-    //       }
-    //       // Return null if user data could not be retrieved
-    //       return null
-    //     }
-    //   })
+        // If no error and we have user data, return it
+        if (res.ok && user) {
+          console.log(user)
+          return user
+        }
+        // Return null if user data could not be retrieved
+        return null
+      },
+    }),
   ],
 
   session: {
@@ -45,14 +48,23 @@ export const authOptions: AuthOptions = {
   },
 
   callbacks: {
-    async jwt({ token, account, profile, user }) {
+    async jwt({ token, account, user }) {
       // Persist the OAuth access_token and or the user id to the token right after signin
       if (account) {
-        token.accessToken = account.access_token
-        token.id = user?.id
-
-        console.log(token, "token")
+        token.accessToken = account?.access_token
+        token.id = user.id
       }
+      if (user) {
+        token.id = user.id
+        token.fullName = user.fullName
+        token.nickname = user.nickname
+        token.email = user.email
+        token.image = user.image
+        token.access_token = user.access_token
+      }
+
+      console.log(token, "token")
+
       return token
     },
     async session({ session, token }) {

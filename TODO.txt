@@ -17,3 +17,4 @@ next notifications
 if they signed up as contributor they should put their full name
 
 
+# MONGODB_URI="mongodb+srv://Heady:NEZhpj8TohIDmHVP@hangout.16cjxsh.mongodb.net/hangout?retryWrites=true&w=majority"
