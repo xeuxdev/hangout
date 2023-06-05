@@ -6,11 +6,15 @@ import { SignupSchema } from "../utils/Schema"
 import { SignUpType } from "../types"
 import { SubmitButton } from "@/client/components/Buttons"
 import SignUpWithGoogleButton from "../components/SignUpWithGoogleButton"
+import { registerUser } from "../services/registerUser"
+import { toast } from "react-hot-toast"
+import { useRouter } from "next/navigation"
 
 function SignUpForm() {
   const [passwordType, setPasswordType] = useState<"password" | "text">(
     "password"
   )
+  const router = useRouter()
 
   const {
     register,
@@ -26,8 +30,16 @@ function SignUpForm() {
       : setPasswordType("password")
   }
 
-  const onsubmit = (values: SignUpType) => {
-    console.log(values)
+  const onsubmit = async (values: SignUpType) => {
+    await registerUser(values).then((res) => {
+      // console.log(res.data)
+      if (res.status == 201) {
+        toast.success("Account created successfully")
+        router.replace("/setup")
+        return
+      }
+      toast.error(res.message)
+    })
   }
 
   return (

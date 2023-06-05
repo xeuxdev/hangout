@@ -8,9 +8,6 @@ import Users from "@/server/models/Users.model"
 export async function POST(request: Request) {
   await dbConnect()
   const body = await request.json()
-  // const client = await clientPromise
-  // const db = client.db(DB_INFO.MAIN_DB)
-  // const collection = db.collection(DB_INFO.USERS)
 
   if (!body) {
     return AppResponse("Please enter all fields.", 404)

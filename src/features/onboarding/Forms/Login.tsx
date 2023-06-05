@@ -116,7 +116,7 @@ function Login() {
 
       <div className="my-5 text-center">
         <p
-          className="text-purple-600 cursor-pointer"
+          className="text-purple-600 cursor-pointer select-none"
           onClick={() => {
             setOpenForgotPassword(true)
           }}

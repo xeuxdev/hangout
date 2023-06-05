@@ -17,7 +17,7 @@ function Navigation({
       <p className="text-center">
         {content}
         <span
-          className="text-purple-700 font-bold pl-2 cursor-pointer"
+          className="text-purple-700 font-bold pl-2 cursor-pointer select-none"
           onClick={() => router.push(route)}
         >
           {cta}
