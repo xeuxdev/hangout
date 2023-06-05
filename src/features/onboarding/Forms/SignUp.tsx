@@ -9,11 +9,13 @@ import SignUpWithGoogleButton from "../components/SignUpWithGoogleButton"
 import { registerUser } from "../services/registerUser"
 import { toast } from "react-hot-toast"
 import { useRouter } from "next/navigation"
+import { signIn } from "next-auth/react"
 
 function SignUpForm() {
   const [passwordType, setPasswordType] = useState<"password" | "text">(
     "password"
   )
+  const [Loading, setLoading] = useState(false)
   const router = useRouter()
 
   const {
@@ -35,7 +37,22 @@ function SignUpForm() {
       // console.log(res.data)
       if (res.status == 201) {
         toast.success("Account created successfully")
-        router.replace("/setup")
+        toast
+          .promise(
+            signIn("credentials", {
+              email: values.email,
+              password: values.password,
+              redirect: false,
+            }),
+            {
+              loading: "signing you in",
+              error: "something went wrong",
+              success: "signed in successfully",
+            }
+          )
+          .then((res) => {
+            if (res?.ok) router.replace("/setup")
+          })
         return
       }
       toast.error(res.message)

@@ -45,14 +45,16 @@ export async function POST(request: Request) {
 
   const resUser = {
     id: user._id,
-    fullName: user.fullName,
-    nickname: user.nickname,
-    email: user._email,
+    name: user.name,
+    userName: user.userName,
+    email: user.email,
     image: user.image,
     access_token: token,
   }
 
   if (isPassword && user) {
     return NextResponse.json(resUser, { status: 201 })
+  } else {
+    return AppResponse("something went wrong", 500)
   }
 }

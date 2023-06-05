@@ -7,6 +7,10 @@ declare module "next-auth/jwt" {
   interface JWT {
     id: UserId
     accessToken: string | undefined
+    access_token: string | undefined
+    name: string | null | undefined
+    image: string | undefined | null
+    userName: string | undefined
   }
 }
 
@@ -19,7 +23,7 @@ declare module "next-auth" {
   }
   interface User {
     fullName: string | undefined
-    nickname: string | undefined
+    userName: string | undefined
     access_token: string | undefined
   }
 }

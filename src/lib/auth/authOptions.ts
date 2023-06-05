@@ -56,14 +56,14 @@ export const authOptions: AuthOptions = {
       }
       if (user) {
         token.id = user.id
-        token.fullName = user.fullName
-        token.nickname = user.nickname
-        token.email = user.email
-        token.image = user.image
-        token.access_token = user.access_token
+        token.name = user?.name
+        token.userName = user?.userName
+        token.email = user?.email
+        token.image = user?.image
+        token.access_token = user?.access_token
       }
 
-      console.log(token, "token")
+      // console.log(token, "token")
 
       return token
     },
@@ -71,16 +71,23 @@ export const authOptions: AuthOptions = {
       // Send properties to the client, like an access_token and user id from a provider.
       if (token) {
         session.accessToken = token.accessToken
+          ? token.accessToken
+          : token.access_token
         session.user.id = token.id
+        session.user.name = token.name
+        session.user.userName = token.userName
+        session.user.email = token.email
+        session.user.image = token.image
       }
 
-      console.log(session, "session")
+      // console.log(session, "session")
 
       return session
     },
   },
   pages: {
     signIn: "/auth",
+    error: "/auth",
     //  newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
   },
   secret: process.env.NEXTAUTH_SECRET,
