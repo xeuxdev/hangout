@@ -9,12 +9,14 @@ import { SubmitButton } from "@/client/components/Buttons"
 import { Modal } from "@mantine/core"
 import ForgotPassword from "./ForgotPassword"
 import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
 
 function Login() {
   const [passwordType, setPasswordType] = useState<"password" | "text">(
     "password"
   )
   const [openForgotPassword, setOpenForgotPassword] = useState(false)
+  const router = useRouter()
 
   const {
     register,
@@ -38,6 +40,7 @@ function Login() {
       redirect: false,
     }).then((res) => {
       console.log(res)
+      if (res?.ok) router.replace("/home")
     })
   }
   return (
