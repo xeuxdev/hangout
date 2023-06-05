@@ -1,15 +1,16 @@
-import { DB_INFO } from "@/constants/db"
 import { emailRegex, passwordRegex } from "@/constants/regex"
 import { AppResponse } from "@/lib/api/response"
-import clientPromise from "@/lib/db/mongodb"
+import dbConnect from "@/lib/db/dbConnect"
 import bcrypt from "bcrypt"
 import { NextResponse } from "next/server"
+import Users from "@/server/models/Users.model"
 
 export async function POST(request: Request) {
+  await dbConnect()
   const body = await request.json()
-  const client = await clientPromise
-  const db = client.db(DB_INFO.MAIN_DB)
-  const collection = db.collection(DB_INFO.USERS)
+  // const client = await clientPromise
+  // const db = client.db(DB_INFO.MAIN_DB)
+  // const collection = db.collection(DB_INFO.USERS)
 
   if (!body) {
     return AppResponse("Please enter all fields.", 404)
@@ -21,7 +22,7 @@ export async function POST(request: Request) {
   if (!passwordRegex.test(body.password)) {
     return AppResponse("please enter a strong password", 400)
   }
-  const user = await collection.findOne({
+  const user = await Users.findOne({
     email: body.email,
   })
   // .toArray()
@@ -32,7 +33,7 @@ export async function POST(request: Request) {
 
   const hashedPassword = await bcrypt.hash(body.password, 12)
 
-  const res = await collection.insertOne({
+  const res = await Users.create({
     email: body.email,
     password: hashedPassword,
   })
