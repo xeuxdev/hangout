@@ -10,5 +10,14 @@ export type SignUpType = {
 export type SetupProps = {
   formStep: number
   nextFormStep: () => void
-  prevFormStep: () => void
+  // prevFormStep: () => void
+}
+
+export type FillProfileType = {
+  fullName: string
+  userName: string
+  birthday: string
+  gender: string
+  phoneNumber: string
+  occupation: string
 }

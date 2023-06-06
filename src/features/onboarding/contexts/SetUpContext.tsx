@@ -14,6 +14,8 @@ const initData = {
   gender: "",
   phoneNumber: "",
   occupation: "",
+  interests: [""],
+  preference: "",
 }
 
 export type SetUpContextType = {
@@ -25,6 +27,8 @@ export type SetUpContextType = {
     gender: string
     phoneNumber: string
     occupation: string
+    interests: string[]
+    preference: string
   }
   setSetUpValues: (values: Partial<typeof initData>) => void
 }

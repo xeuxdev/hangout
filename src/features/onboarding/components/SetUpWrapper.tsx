@@ -3,11 +3,11 @@
 import { useState } from "react"
 import SelectCountry from "./SetUp/SelectCountry"
 import { SetUpContextProvider } from "../contexts/SetUpContext"
+import FillYourProfile from "./SetUp/FillYourProfile"
 
 const headers = [
   "Select Country",
   "Fill Your Profile",
-  "Add Your Best Photos",
   "Select Your Interest",
   "Select Your Ideal Match",
 ]
@@ -45,6 +45,7 @@ function SetUpWrapper() {
       </header>
       <SetUpContextProvider>
         <SelectCountry {...props} />
+        <FillYourProfile {...props} />
       </SetUpContextProvider>
     </>
   )
