@@ -9,8 +9,8 @@ export default function SetUpLayout({
   children: React.ReactNode
 }) {
   return (
-    <main className="bg-primary dark:bg-primary_dark flex items-center justify-center flex-col min-h-screen">
-      <section className="w-full max-w-md px-5">{children}</section>
+    <main className="bg-primary dark:bg-primary_dark min-h-screen py-12 container">
+      <section className="w-full max-w-lg px-5 mx-auto">{children}</section>
     </main>
   )
 }

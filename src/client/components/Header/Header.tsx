@@ -5,7 +5,7 @@ import React from "react"
 function Header() {
   const { theme, setTheme } = useTheme()
   return (
-    <div className="absolute top-5 right-5">
+    <div className="fixed top-5 right-5 z-50">
       <div
         onClick={() => {
           theme == "light" ? setTheme("dark") : setTheme("light")
