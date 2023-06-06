@@ -22,7 +22,7 @@ export const FillProfileSchema = z.object({
   userName: z
     .string()
     .min(2, { message: "user name must be at least 2 characters" }),
-  birthday: z.string(),
+  birthday: z.string().min(1, { message: "required" }),
   gender: z.string().min(2, { message: "required" }),
   phoneNumber: z.string(),
   occupation: z.string(),

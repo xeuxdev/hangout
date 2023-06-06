@@ -8,26 +8,40 @@ import PhoneInput from "react-phone-input-2"
 import "react-phone-input-2/lib/style.css"
 import { useTheme } from "next-themes"
 import { useSetUpAccountData } from "../../contexts/SetUpContext"
+import { useSession } from "next-auth/react"
+import { verifyUsername } from "../../services/verifyUsername"
+import { toast } from "react-hot-toast"
 
 function FillYourProfile({ formStep, nextFormStep }: SetupProps) {
   const { theme } = useTheme()
   const { setSetUpValues } = useSetUpAccountData()
+  const { data: session } = useSession()
 
   const {
-    register,
-    handleSubmit,
     control,
+    handleSubmit,
     formState: { errors },
+    register,
   } = useForm<FillProfileType>({
     resolver: zodResolver(FillProfileSchema),
+    defaultValues: {
+      fullName: session?.user.name as string,
+    },
   })
 
-  const onsubmit = (profileData: FillProfileType) => {
+  const onsubmit = async (profileData: FillProfileType) => {
     console.log(profileData)
-
     setSetUpValues(profileData)
-    nextFormStep()
+    const res = await verifyUsername(profileData.userName)
+
+    if (res.status === "rejected") {
+      toast.error(res.msg)
+    } else {
+      // toast.success(res.msg)
+      nextFormStep()
+    }
   }
+
   return (
     <div
       className={`w-full flex-col ${
@@ -72,7 +86,7 @@ function FillYourProfile({ formStep, nextFormStep }: SetupProps) {
           <input
             type="date"
             id="birthday"
-            min={"2004-01-01"}
+            max={"2005-01-01"}
             {...register("birthday")}
             className="w-full h-14 px-5 rounded-md bg-input_bg_light2 dark:bg-input_bg_dark outline-none focus-visible:ring-2 focus-visible:ring-pri_btn"
             placeholder="Date of Birth"

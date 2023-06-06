@@ -6,6 +6,7 @@ import { SetUpContextProvider } from "../contexts/SetUpContext"
 import FillYourProfile from "./SetUp/FillYourProfile"
 import SelectInterests from "./SetUp/SelectInterests"
 import Preference from "./SetUp/Preference"
+import { useSession } from "next-auth/react"
 
 const headers = [
   "Select Country",
@@ -16,6 +17,7 @@ const headers = [
 
 function SetUpWrapper() {
   const [formStep, setFormStep] = useState(0)
+  const { data: session, status } = useSession()
 
   const nextFormStep = () => setFormStep((prev) => prev + 1)
   const prevFormStep = () => setFormStep((prev) => prev - 1)
@@ -48,7 +50,7 @@ function SetUpWrapper() {
       <SetUpContextProvider>
         <div className="container">
           <SelectCountry {...props} />
-          <FillYourProfile {...props} />
+          {status == "authenticated" && <FillYourProfile {...props} />}
           <SelectInterests {...props} />
           <Preference {...props} />
         </div>

@@ -1,9 +1,6 @@
 import { AppResponse } from "@/lib/api/response"
-import { authOptions } from "@/lib/auth/authOptions"
 import dbConnect from "@/lib/db/dbConnect"
 import Users from "@/server/models/Users.model"
-import { getServerSession } from "next-auth"
-import { NextResponse } from "next/server"
 
 type SETUPPROPS = {
   country: string
@@ -39,7 +36,7 @@ export async function POST(request: Request) {
 
   user.birthday = body.birthday
   user.country = body.country
-  user.fullName = body.fullName
+  user.name = body.fullName
   user.interests = body.interests
   user.occupation = body.occupation
   user.phone = body.phoneNumber

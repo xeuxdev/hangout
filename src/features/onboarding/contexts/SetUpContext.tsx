@@ -43,9 +43,10 @@ export const SetUpContextProvider = ({
     }))
   }
 
-  useEffect(() => {
-    console.log(setUpData)
-  }, [setUpData])
+  // for dev
+  // useEffect(() => {
+  //   console.log(setUpData)
+  // }, [setUpData])
 
   return (
     <SetUpContext.Provider value={{ setUpData, setSetUpValues }}>

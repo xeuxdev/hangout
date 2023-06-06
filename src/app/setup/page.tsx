@@ -6,10 +6,14 @@ import React from "react"
 async function Setup() {
   const session = await serverSession()
 
-  // console.log(session)
+  console.log(session?.user)
 
   if (!session) {
     redirect("/auth/signin")
+  }
+
+  if (session.user.userName !== "" && session.user.userName) {
+    redirect("/home")
   }
   return (
     <>

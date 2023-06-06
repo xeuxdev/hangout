@@ -10,9 +10,9 @@ function SelectInterests({ formStep, nextFormStep }: SetupProps) {
   const [selectedInterests, setSelectedInterests] = useState<number[]>([0])
   const { setSetUpValues } = useSetUpAccountData()
 
-  useEffect(() => {
-    console.log(selectedInterests)
-  }, [selectedInterests])
+  // useEffect(() => {
+  //   console.log(selectedInterests)
+  // }, [selectedInterests])
 
   const handleSubmit = () => {
     let result = selectedInterests.map((index) => interests[index])

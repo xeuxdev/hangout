@@ -22,7 +22,6 @@ declare module "next-auth" {
     accessToken: string | undefined
   }
   interface User {
-    fullName: string | undefined
     userName: string | undefined
     access_token: string | undefined
   }
