@@ -13,9 +13,9 @@ const UsersSchema = new mongoose.Schema(
     birthday: { type: String, default: "" },
     country: { type: String, default: "" },
     interests: { type: Array, default: [] },
-    idealMatch: {
-      type: String,
-      enum: ["love", "friends", "fling", "business"],
+    preferences: {
+      type: Array,
+      default: [""],
     },
   },
   {

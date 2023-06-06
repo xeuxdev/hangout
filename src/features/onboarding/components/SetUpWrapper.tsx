@@ -5,12 +5,13 @@ import SelectCountry from "./SetUp/SelectCountry"
 import { SetUpContextProvider } from "../contexts/SetUpContext"
 import FillYourProfile from "./SetUp/FillYourProfile"
 import SelectInterests from "./SetUp/SelectInterests"
+import Preference from "./SetUp/Preference"
 
 const headers = [
   "Select Country",
   "Fill Your Profile",
   "Select Your Interest",
-  "Select Your Ideal Match",
+  "Select Your Preference",
 ]
 
 function SetUpWrapper() {
@@ -49,6 +50,7 @@ function SetUpWrapper() {
           <SelectCountry {...props} />
           <FillYourProfile {...props} />
           <SelectInterests {...props} />
+          <Preference {...props} />
         </div>
       </SetUpContextProvider>
     </>
