@@ -36,7 +36,14 @@ const LineWave: React.FunctionComponent<Props> = ({
 }): React.ReactElement => {
   return (
     <div
-      style={{ ...getDefaultStyle(visible), ...wrapperStyle }}
+      style={{
+        ...getDefaultStyle(visible),
+        ...wrapperStyle,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh",
+      }}
       className={wrapperClass}
       data-testid="line-wave-wrapper"
       aria-label={ariaLabel}
