@@ -107,14 +107,14 @@ function FillYourProfile({ formStep, nextFormStep }: SetupProps) {
           <Controller
             control={control}
             name="phoneNumber"
-            rules={{ required: true }}
+            rules={{ required: false }}
             render={({ field: { ref, ...field } }) => (
               <PhoneInput
                 {...field}
                 inputProps={{
                   name: "phoneNumber",
                   ref,
-                  required: true,
+                  required: false,
                 }}
                 inputStyle={{
                   width: "100%",

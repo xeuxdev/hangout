@@ -81,7 +81,7 @@ function SelectCountry({ formStep, nextFormStep }: SetupProps) {
 
               <div className="w-4 h-4 rounded-full ring-[3px] ring-pri_btn ml-auto flex items-center justify-center">
                 {activeIndex == i && (
-                  <div className="ring-2 ring-input_bg_dark dark:ring-input_bg_dark w-3 h-3 bg-pri_btn rounded-md"></div>
+                  <div className="ring-2 ring-input_bg_light dark:ring-input_bg_dark w-3 h-3 bg-pri_btn rounded-md"></div>
                 )}
               </div>
             </div>
