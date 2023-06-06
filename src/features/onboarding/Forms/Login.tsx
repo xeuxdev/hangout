@@ -10,6 +10,8 @@ import { Modal } from "@mantine/core"
 import ForgotPassword from "./ForgotPassword"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
+import axios from "axios"
+import { toast } from "react-hot-toast"
 
 function Login() {
   const [passwordType, setPasswordType] = useState<"password" | "text">(
@@ -33,15 +35,24 @@ function Login() {
   }
 
   const onsubmit = async (values: LoginType) => {
-    console.log(values)
-    await signIn("credentials", {
-      email: values.email,
-      password: values.password,
-      redirect: false,
-    }).then((res) => {
-      console.log(res)
-      if (res?.ok) router.replace("/home")
-    })
+    // console.log(values)
+    try {
+      const response = await axios.post("/api/users/login", values)
+      console.log(response.data, response.status)
+      if (response.status === 200) {
+        await signIn("credentials", {
+          email: values.email,
+          password: values.password,
+          redirect: false,
+        }).then((res) => {
+          // console.log(res)
+          toast.success("login successful")
+          if (res?.ok) router.replace("/home")
+        })
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message)
+    }
   }
   return (
     <>

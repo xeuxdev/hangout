@@ -53,7 +53,7 @@ export async function POST(request: Request) {
   }
 
   if (isPassword && user) {
-    return NextResponse.json(resUser, { status: 201 })
+    return NextResponse.json(resUser, { status: 200 })
   } else {
     return AppResponse("something went wrong", 500)
   }
