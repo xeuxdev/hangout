@@ -13,6 +13,18 @@ export type SetupProps = {
   // prevFormStep: () => void
 }
 
+export type setUpData = {
+  country: string
+  fullName: string
+  userName: string
+  birthday: string
+  gender: string
+  phoneNumber: string
+  occupation: string
+  interests: string[]
+  preferences: string[]
+}
+
 export type FillProfileType = {
   fullName: string
   userName: string

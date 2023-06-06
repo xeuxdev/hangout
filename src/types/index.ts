@@ -8,5 +8,6 @@ export type UserData = {
   birthday: string
   country: string
   interests: string[]
+  preferences: string[]
   _id: string
 }

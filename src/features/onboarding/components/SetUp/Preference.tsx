@@ -5,35 +5,20 @@ import Image from "next/image"
 import { Button } from "@/client/components/Buttons"
 import { toast } from "react-hot-toast"
 import { useSetUpAccountData } from "../../contexts/SetUpContext"
-
-const preferences = [
-  {
-    src: "./assets/love.svg",
-    name: "Love",
-  },
-  {
-    src: "./assets/friends.svg",
-    name: "Friends",
-  },
-  {
-    src: "./assets/fling.svg",
-    name: "Fling",
-  },
-  {
-    src: "./assets/business.svg",
-    name: "Business",
-  },
-]
+import { setUpUserProfile } from "../../services/setUpProfile"
+import { preferences } from "../../data/preferences"
+import { useSession } from "next-auth/react"
 
 function Preference({ formStep, nextFormStep }: SetupProps) {
   const [selectedPreference, setSelectedPreference] = useState<number[]>([0])
-  const { setSetUpValues } = useSetUpAccountData()
+  const { setUpData, setSetUpValues } = useSetUpAccountData()
+  const { data: session } = useSession()
 
   useEffect(() => {
     console.log(selectedPreference)
   }, [selectedPreference])
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     let result = selectedPreference.map((index) => preferences[index].name)
 
     if (result.length == 0) {
@@ -44,7 +29,14 @@ function Preference({ formStep, nextFormStep }: SetupProps) {
     setSetUpValues({
       preferences: result,
     })
-    nextFormStep()
+
+    let props = {
+      ...setUpData,
+      preferences: result,
+      userId: session?.user.id,
+    }
+
+    await setUpUserProfile(props)
   }
 
   return (
@@ -90,7 +82,7 @@ function Preference({ formStep, nextFormStep }: SetupProps) {
       </div>
 
       <div className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[90%] z-30 max-w-lg">
-        <Button content="continue" variant="filled" onClick={handleSubmit} />
+        <Button content="finish" variant="filled" onClick={handleSubmit} />
       </div>
     </div>
   )

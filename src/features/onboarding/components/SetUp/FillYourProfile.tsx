@@ -43,7 +43,7 @@ function FillYourProfile({ formStep, nextFormStep }: SetupProps) {
           <input
             id="fullname"
             {...register("fullName")}
-            className="w-full h-14 px-5 rounded-md bg-input_bg_light2 dark:bg-input_bg_dark outline-none"
+            className="w-full h-14 px-5 rounded-md bg-input_bg_light2 dark:bg-input_bg_dark outline-none focus-visible:ring-2 focus-visible:ring-pri_btn"
             placeholder="Full Name"
           />
           <p className="text-xs text-red-500">{errors.fullName?.message}</p>
@@ -57,7 +57,7 @@ function FillYourProfile({ formStep, nextFormStep }: SetupProps) {
           <input
             id="username"
             {...register("userName")}
-            className="w-full h-14 px-5 rounded-md bg-input_bg_light2 dark:bg-input_bg_dark outline-none"
+            className="w-full h-14 px-5 rounded-md bg-input_bg_light2 dark:bg-input_bg_dark outline-none focus-visible:ring-2 focus-visible:ring-pri_btn"
             placeholder="User Name"
           />
           <p className="text-xs text-red-500">{errors.userName?.message}</p>
@@ -74,7 +74,7 @@ function FillYourProfile({ formStep, nextFormStep }: SetupProps) {
             id="birthday"
             min={"2004-01-01"}
             {...register("birthday")}
-            className="w-full h-14 px-5 rounded-md bg-input_bg_light2 dark:bg-input_bg_dark outline-none"
+            className="w-full h-14 px-5 rounded-md bg-input_bg_light2 dark:bg-input_bg_dark outline-none focus-visible:ring-2 focus-visible:ring-pri_btn"
             placeholder="Date of Birth"
           />
           <p className="text-xs text-red-500">{errors.birthday?.message}</p>
@@ -88,7 +88,7 @@ function FillYourProfile({ formStep, nextFormStep }: SetupProps) {
 
           <select
             id="gender"
-            className="w-full h-14 px-5 rounded-md bg-input_bg_light2 dark:bg-input_bg_dark outline-none"
+            className="w-full h-14 px-5 rounded-md bg-input_bg_light2 dark:bg-input_bg_dark outline-none focus-visible:ring-2 focus-visible:ring-pri_btn"
             {...register("gender")}
           >
             <option value="">---Select Gender---</option>
@@ -143,7 +143,7 @@ function FillYourProfile({ formStep, nextFormStep }: SetupProps) {
             type="text"
             id="occupation"
             {...register("occupation")}
-            className="w-full h-14 px-5 rounded-md bg-input_bg_light2 dark:bg-input_bg_dark outline-none"
+            className="w-full h-14 px-5 rounded-md bg-input_bg_light2 dark:bg-input_bg_dark outline-none focus-visible:ring-2 focus-visible:ring-pri_btn"
             placeholder="Occupation"
           />
           <p className="text-xs text-red-500">{errors.occupation?.message}</p>

@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from "react"
+import { setUpData } from "../types"
 
 const initData = {
   country: "",
@@ -19,17 +20,7 @@ const initData = {
 }
 
 export type SetUpContextType = {
-  setUpData: {
-    country: string
-    fullName: string
-    userName: string
-    birthday: string
-    gender: string
-    phoneNumber: string
-    occupation: string
-    interests: string[]
-    preferences: string[]
-  }
+  setUpData: setUpData
   setSetUpValues: (values: Partial<typeof initData>) => void
 }
 export type SetUpContextProviderType = {
