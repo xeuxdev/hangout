@@ -30,7 +30,7 @@ function FillYourProfile({ formStep, nextFormStep }: SetupProps) {
   })
 
   const onsubmit = async (profileData: FillProfileType) => {
-    console.log(profileData)
+    // console.log(profileData)
     setSetUpValues(profileData)
     const res = await verifyUsername(profileData.userName)
 
