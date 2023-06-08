@@ -10,8 +10,7 @@ import { preferences } from "../../data/preferences"
 import { useSession } from "next-auth/react"
 import { useMutation } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
-import { Circles } from "@/client/components/UiElements"
-import SuccessIcon from "@/client/components/Icons/SuccessIcon"
+import SuccessModal from "@/client/components/Modals/SuccessModal"
 
 function Preference({ formStep }: SetupProps) {
   const [selectedPreference, setSelectedPreference] = useState<number[]>([0])
@@ -117,29 +116,10 @@ function Preference({ formStep }: SetupProps) {
       </div>
 
       {isSuccess && (
-        <>
-          <div className="fixed w-full h-full z-40 top-0 left-0 bg-input_bg_dark/50"></div>
-
-          <div className="bg-input_bg_light dark:bg-input_bg_dark rounded-3xl h-[29.75rem] w-[21.25rem] absolute inset-0 m-auto z-50 p-6">
-            <div className="flex justify-center mb-10 mt-7">
-              <SuccessIcon />
-            </div>
-
-            <div className="space-y-4 text-center">
-              <p className="text-2xl text-pri_btn font-bold">
-                Congratulations!
-              </p>
-              <p>
-                Your account is ready to use. You will be redirected to the home
-                page in a few seconds.
-              </p>
-            </div>
-
-            <div className="w-16 h-16 mx-auto mt-10">
-              <Circles />
-            </div>
-          </div>
-        </>
+        <SuccessModal
+          content="Your account is ready to use. You will be redirected to the home
+        page in a few seconds."
+        />
       )}
     </>
   )
