@@ -7,7 +7,7 @@ import { toast } from "react-hot-toast"
 import { useSetUpAccountData } from "../../contexts/SetUpContext"
 import { setUpUserProfile } from "../../services/setUpProfile"
 import { preferences } from "../../data/preferences"
-import { useSession } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 import { useMutation } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
 import SuccessModal from "@/client/components/Modals/SuccessModal"
@@ -53,7 +53,9 @@ function Preference({ formStep }: SetupProps) {
       toast.success(data?.message)
 
       setTimeout(() => {
-        router.replace("/home")
+        signOut({
+          callbackUrl: "/auth/signin",
+        })
       }, 1500)
     }
 
@@ -116,10 +118,7 @@ function Preference({ formStep }: SetupProps) {
       </div>
 
       {isSuccess && (
-        <SuccessModal
-          content="Your account is ready to use. You will be redirected to the home
-        page in a few seconds."
-        />
+        <SuccessModal content="Your account is ready to use. You will be signed out and required to login." />
       )}
     </>
   )

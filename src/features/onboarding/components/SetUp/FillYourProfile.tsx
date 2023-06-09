@@ -11,6 +11,7 @@ import { useSetUpAccountData } from "../../contexts/SetUpContext"
 import { useSession } from "next-auth/react"
 import { verifyUsername } from "../../services/verifyUsername"
 import { toast } from "react-hot-toast"
+import { getTime18YearsBack } from "@/helpers/getTime18YearsBack"
 
 function FillYourProfile({ formStep, nextFormStep }: SetupProps) {
   const { theme } = useTheme()
@@ -86,7 +87,7 @@ function FillYourProfile({ formStep, nextFormStep }: SetupProps) {
           <input
             type="date"
             id="birthday"
-            max={"2005-01-01"}
+            max={getTime18YearsBack()}
             {...register("birthday")}
             className="w-full h-14 px-5 rounded-md bg-input_bg_light2 dark:bg-input_bg_dark outline-none focus-visible:ring-2 focus-visible:ring-pri_btn"
             placeholder="Date of Birth"
