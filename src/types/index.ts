@@ -1,6 +1,6 @@
 export type UserData = {
-  fullName: string
-  nickname: string
+  name: string
+  userName: string
   email: string
   image: string
   phone: string
@@ -9,5 +9,6 @@ export type UserData = {
   country: string
   interests: string[]
   preferences: string[]
+  about: string
   _id: string
 }

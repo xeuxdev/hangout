@@ -7,7 +7,7 @@ import { useSetUpAccountData } from "../../contexts/SetUpContext"
 import { toast } from "react-hot-toast"
 
 function SelectInterests({ formStep, nextFormStep }: SetupProps) {
-  const [selectedInterests, setSelectedInterests] = useState<number[]>([0])
+  const [selectedInterests, setSelectedInterests] = useState<number[]>([])
   const { setSetUpValues } = useSetUpAccountData()
 
   // useEffect(() => {
