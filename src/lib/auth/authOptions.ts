@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 import clientPromise from "../db/mongodb"
+import axios from "axios"
 
 export const authOptions: AuthOptions = {
   // adapter: PrismaAdapter(prisma),
@@ -24,20 +25,23 @@ export const authOptions: AuthOptions = {
         },
         req
       ) {
-        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/users/login`, {
-          method: "POST",
-          body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" },
-        })
-        const user = await res.json()
+        const res = await axios.post(
+          `${process.env.NEXTAUTH_URL}/api/users/login`,
+          credentials
+        )
+        const user = res.data
 
         // If no error and we have user data, return it
-        if (res.ok && user) {
-          console.log(user)
+        if (user) {
+          // console.log(user)
+          // Any object returned will be saved in `user` property of the JWT
           return user
+        } else {
+          // If you return null then an error will be displayed advising the user to check their details.
+          return null
+
+          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
         }
-        // Return null if user data could not be retrieved
-        return null
       },
     }),
   ],
