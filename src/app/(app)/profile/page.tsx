@@ -16,7 +16,6 @@ export async function generateMetadata() {
 async function ProfilePage() {
   const session = await getServerSession(authOptions)
 
-  console.log(session)
   return (
     <div className="max-w-lg mx-auto pb-20">
       <h1 className="text-2xl font-semibold tracking-wide">Profile</h1>

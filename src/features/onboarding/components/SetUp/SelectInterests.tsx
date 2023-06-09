@@ -44,7 +44,7 @@ function SelectInterests({ formStep, nextFormStep }: SetupProps) {
         {interests.map((interest, index) => (
           <button
             key={interest + index}
-            className={`px-4 py-1 rounded-full w-fix ring-2 ring-pri_btn hover:ring-[3px] font-medium ${
+            className={`px-4 py-1 rounded-full w-fit ring-2 ring-pri_btn hover:ring-[3px] font-medium ${
               selectedInterests.includes(index) ? "bg-pri_btn text-white" : ""
             }`}
             onClick={() => {
