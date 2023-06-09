@@ -38,7 +38,7 @@ function Login() {
     // console.log(values)
     try {
       const response = await axios.post("/api/users/login", values)
-      // console.log(response.data, response.status)
+      console.log(response.data, response.status)
       if (response.status === 200) {
         await signIn("credentials", {
           email: values.email,
