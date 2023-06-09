@@ -1,11 +1,15 @@
 "use client"
+import { useSession } from "next-auth/react"
 import { useTheme } from "next-themes"
+import Image from "next/image"
 import React from "react"
+import Profile from "../Navigation/Profile"
 
 function Header() {
   const { theme, setTheme } = useTheme()
+  const { data: session } = useSession()
   return (
-    <div className="fixed top-5 right-5 z-50">
+    <div className="fixed top-5 right-5 lg:right-10 z-50 items-center gap-3 lg:flex hidden">
       <div
         onClick={() => {
           theme == "light" ? setTheme("dark") : setTheme("light")
@@ -28,6 +32,8 @@ function Header() {
           </svg>
         )}
       </div>
+
+      <Profile />
     </div>
   )
 }

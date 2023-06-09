@@ -6,6 +6,12 @@ module.exports = {
     container: {
       center: true,
     },
+    screens: {
+      sm: "680px",
+      md: "780px",
+      lg: "1024px",
+      xl: "1111px",
+    },
     extend: {
       colors: {
         primary: "hsl(0, 0%, 100%)",
