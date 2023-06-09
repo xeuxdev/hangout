@@ -6,6 +6,14 @@ import axios from "axios"
 import { getServerSession } from "next-auth"
 import { Suspense } from "react"
 
+export async function generateMetadata() {
+  const session = await getServerSession(authOptions)
+  return {
+    title: session?.user.userName + " " + "Profile",
+    description: "Your Profile Info",
+  }
+}
+
 async function MyProfilePage() {
   const session = await getServerSession(authOptions)
 

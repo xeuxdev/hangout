@@ -7,7 +7,7 @@ import LogOut from "./LogOut"
 import { authOptions } from "@/lib/auth/authOptions"
 
 export async function generateMetadata() {
-  const session = await getServerSession()
+  const session = await getServerSession(authOptions)
   return {
     title: session?.user.userName + " " + "Profile",
     description: "Find your dates",
