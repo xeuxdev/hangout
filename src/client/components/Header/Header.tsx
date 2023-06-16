@@ -1,7 +1,6 @@
 "use client"
 import { useSession } from "next-auth/react"
 import { useTheme } from "next-themes"
-import Image from "next/image"
 import React from "react"
 import Profile from "../Navigation/Profile"
 
@@ -33,7 +32,7 @@ function Header() {
         )}
       </div>
 
-      <Profile />
+      {session && <Profile />}
     </div>
   )
 }

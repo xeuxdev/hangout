@@ -40,15 +40,25 @@ function Login() {
       const response = await axios.post("/api/users/login", values)
       // console.log(response.data, response.status)
       if (response.status === 200) {
-        await signIn("credentials", {
-          email: values.email,
-          password: values.password,
-          redirect: false,
-        }).then((res) => {
-          // console.log(res)
-          toast.success("login successful")
-          if (res?.ok) router.replace("/setup")
-        })
+        toast
+          .promise(
+            signIn("credentials", {
+              email: values.email,
+              password: values.password,
+              redirect: false,
+            }),
+            {
+              error: "something went wrong",
+              loading: "logging in",
+              success: "login successful",
+            }
+          )
+
+          .then((res) => {
+            // console.log(res)
+            // toast.success("login successful")
+            if (res?.ok) router.replace("/setup")
+          })
       }
     } catch (error: any) {
       toast.error(error.response.data.message)

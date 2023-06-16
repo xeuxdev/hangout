@@ -42,7 +42,7 @@ const Profile = () => {
               <Skeleton width={32} height={32} />
             ) : user?.image == "" ? (
               <Image
-                src={`https://api.multiavatar.com/${user.userName}.svg`}
+                src={`https://api.multiavatar.com/${user.name}`}
                 alt={user.userName + "profile image"}
                 width={32}
                 height={32}
