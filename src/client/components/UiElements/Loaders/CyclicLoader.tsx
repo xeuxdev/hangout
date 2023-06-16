@@ -2,7 +2,7 @@ import { DEFAULT_COLOR } from "./type"
 
 const CyclicLoader = ({ color = DEFAULT_COLOR }) => (
   <div
-    className={"flex items-center justify-center fixed inset-0 "}
+    className={"flex items-center justify-center fixed inset-0 z-50 "}
     aria-label={"circles-loading"}
   >
     <div className="fixed inset-0 bg-primary_dark/20 dark:bg-primary_dark/60"></div>

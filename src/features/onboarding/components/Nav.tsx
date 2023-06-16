@@ -16,12 +16,12 @@ function Navigation({
     <div>
       <p className="text-center">
         {content}
-        <span
+        <button
           className="text-purple-700 font-bold pl-2 cursor-pointer select-none"
           onClick={() => router.push(route)}
         >
           {cta}
-        </span>
+        </button>
       </p>
     </div>
   )

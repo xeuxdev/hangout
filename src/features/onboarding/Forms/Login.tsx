@@ -12,12 +12,14 @@ import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import axios from "axios"
 import { toast } from "react-hot-toast"
+import { CyclicLoader } from "@/client/components/UiElements"
 
 function Login() {
   const [passwordType, setPasswordType] = useState<"password" | "text">(
     "password"
   )
   const [openForgotPassword, setOpenForgotPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
   const {
@@ -36,36 +38,30 @@ function Login() {
 
   const onsubmit = async (values: LoginType) => {
     // console.log(values)
+    setIsLoading(true)
     try {
       const response = await axios.post("/api/users/login", values)
       // console.log(response.data, response.status)
       if (response.status === 200) {
-        toast
-          .promise(
-            signIn("credentials", {
-              email: values.email,
-              password: values.password,
-              redirect: false,
-            }),
-            {
-              error: "something went wrong",
-              loading: "logging in",
-              success: "login successful",
-            }
-          )
-
-          .then((res) => {
-            // console.log(res)
-            // toast.success("login successful")
-            if (res?.ok) router.replace("/setup")
-          })
+        await signIn("credentials", {
+          email: values.email,
+          password: values.password,
+          redirect: false,
+        }).then((res) => {
+          // console.log(res)
+          toast.success("login successful")
+          if (res?.ok) router.replace("/setup")
+        })
       }
     } catch (error: any) {
+      setIsLoading(false)
       toast.error(error.response.data.message)
     }
   }
+
   return (
     <>
+      {isLoading && <CyclicLoader />}
       <form onSubmit={handleSubmit(onsubmit)} className="space-y-7">
         {/* email */}
         <div className="w-full">

@@ -10,12 +10,13 @@ import { registerUser } from "../services/registerUser"
 import { toast } from "react-hot-toast"
 import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
+import { CyclicLoader } from "@/client/components/UiElements"
 
 function SignUpForm() {
   const [passwordType, setPasswordType] = useState<"password" | "text">(
     "password"
   )
-  const [Loading, setLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
   const {
@@ -33,6 +34,7 @@ function SignUpForm() {
   }
 
   const onsubmit = async (values: SignUpType) => {
+    setIsLoading(true)
     await registerUser(values).then((res) => {
       // console.log(res.data)
       if (res.status == 201) {
@@ -54,13 +56,16 @@ function SignUpForm() {
             if (res?.ok) router.replace("/setup")
           })
         return
+      } else {
+        setIsLoading(false)
+        toast.error(res.message)
       }
-      toast.error(res.message)
     })
   }
 
   return (
     <>
+      {isLoading && <CyclicLoader />}
       <form onSubmit={handleSubmit(onsubmit)} className="space-y-7">
         {/* email */}
         <div className="w-full">
