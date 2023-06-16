@@ -22,6 +22,10 @@ export const FillProfileSchema = z.object({
   userName: z
     .string()
     .min(2, { message: "user name must be at least 2 characters" }),
+  about: z
+    .string()
+    .min(10, { message: "about must be at least 10 characters" })
+    .max(200, { message: "about too long" }),
   birthday: z.string().min(1, { message: "required" }),
   gender: z.string().min(2, { message: "required" }),
   phoneNumber: z.string(),

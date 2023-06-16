@@ -6,6 +6,7 @@ type SETUPPROPS = {
   country: string
   fullName: string
   userName: string
+  about: string
   birthday: string
   gender: string
   phoneNumber: string
@@ -37,6 +38,7 @@ export async function POST(request: Request) {
   user.birthday = body.birthday
   user.country = body.country
   user.name = body.fullName
+  user.about = body.about
   user.interests = body.interests
   user.occupation = body.occupation
   user.phone = body.phoneNumber

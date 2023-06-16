@@ -11,6 +11,7 @@ const initData = {
   country: "",
   fullName: "",
   userName: "",
+  about: "",
   birthday: "",
   gender: "",
   phoneNumber: "",

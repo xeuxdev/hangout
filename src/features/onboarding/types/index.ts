@@ -28,6 +28,7 @@ export type setUpData = {
 export type FillProfileType = {
   fullName: string
   userName: string
+  about: string
   birthday: string
   gender: string
   phoneNumber: string

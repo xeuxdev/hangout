@@ -78,6 +78,20 @@ function FillYourProfile({ formStep, nextFormStep }: SetupProps) {
           <p className="text-xs text-red-500">{errors.userName?.message}</p>
         </div>
 
+        {/* about */}
+        <div className="w-full">
+          <label htmlFor="about" className="sr-only">
+            About
+          </label>
+          <input
+            id="about"
+            {...register("about")}
+            className="w-full h-14 px-5 rounded-md bg-input_bg_light2 dark:bg-input_bg_dark outline-none focus-visible:ring-2 focus-visible:ring-pri_btn"
+            placeholder="tell others about yourself"
+          />
+          <p className="text-xs text-red-500">{errors.about?.message}</p>
+        </div>
+
         {/* date of birth */}
 
         <div className="w-full">
