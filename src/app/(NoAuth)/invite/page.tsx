@@ -1,3 +1,4 @@
+import NavHeader from "@/client/components/Navigation/NavHeader"
 import React from "react"
 
 export const metadata = {
@@ -5,7 +6,11 @@ export const metadata = {
 }
 
 function InvitePage() {
-  return <div>InvitePage</div>
+  return (
+    <>
+      <NavHeader content="Invite friends" />
+    </>
+  )
 }
 
 export default InvitePage
