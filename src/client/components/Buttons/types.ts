@@ -5,7 +5,7 @@ export interface GeneralButtonType {
   link: string
   variant: "filled" | "empty"
   children?: ReactNode
-  extraStyles?: string
+  extraStyle?: string
 }
 
 export type LinkButtonProps = React.FunctionComponent<
