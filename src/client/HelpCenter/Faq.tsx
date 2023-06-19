@@ -19,8 +19,12 @@ function Faq() {
         <Accordion defaultValue="">
           {filterFaq.map((faq, index) => (
             <Accordion.Item value={faq.question} key={faq.question + index}>
-              <Accordion.Control>{faq.question}</Accordion.Control>
-              <Accordion.Panel>{faq.answer}</Accordion.Panel>
+              <Accordion.Control className="text-primary_dark dark:text-primary">
+                {faq.question}
+              </Accordion.Control>
+              <Accordion.Panel className="text-primary_dark dark:text-primary">
+                {faq.answer}
+              </Accordion.Panel>
             </Accordion.Item>
           ))}
         </Accordion>

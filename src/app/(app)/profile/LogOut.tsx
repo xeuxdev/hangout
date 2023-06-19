@@ -60,7 +60,7 @@ function LogOut() {
                   extraStyle="px-3"
                   onClick={() => {
                     setShowLogOut(false)
-                    console.log("clicked")
+                    // console.log("clicked")
                   }}
                 />
                 <Button
