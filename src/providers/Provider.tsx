@@ -3,6 +3,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { SessionProvider } from "next-auth/react"
 import { ThemeProvider } from "next-themes"
 import { useEffect, useState } from "react"
+import { SkeletonTheme } from "react-loading-skeleton"
+import "react-loading-skeleton/dist/skeleton.css"
 
 function Providers({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false)
@@ -19,7 +21,11 @@ function Providers({ children }: { children: React.ReactNode }) {
   return (
     <SessionProvider>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider attribute="class">{children}</ThemeProvider>
+        <ThemeProvider attribute="class">
+          <SkeletonTheme baseColor="#202020" highlightColor="#444">
+            {children}
+          </SkeletonTheme>
+        </ThemeProvider>
       </QueryClientProvider>
     </SessionProvider>
   )

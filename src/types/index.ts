@@ -12,3 +12,7 @@ export type UserData = {
   about: string
   _id: string
 }
+
+export type UserProfile = UserData & {
+  gender: string
+}

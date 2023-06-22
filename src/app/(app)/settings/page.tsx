@@ -13,9 +13,9 @@ function Settings() {
     <>
       <NavHeader content="Settings" />
 
-      <section className="space-y-10">
+      <section className="space-y-10 max-w-md mx-auto">
         <Link
-          href="/ssettings/personal"
+          href="/settings/personal"
           className="flex items-center justify-between"
         >
           <div className="flex items-center gap-3">
@@ -35,7 +35,7 @@ function Settings() {
         </Link>
 
         <Link
-          href="/ssettings/discovery"
+          href="/settings/discovery"
           className="flex items-center justify-between"
         >
           <div className="flex items-center gap-3">
@@ -55,7 +55,7 @@ function Settings() {
         </Link>
 
         <Link
-          href="/ssettings/privacy"
+          href="/settings/privacy"
           className="flex items-center justify-between"
         >
           <div className="flex items-center gap-3">
@@ -75,7 +75,7 @@ function Settings() {
         </Link>
 
         <Link
-          href="/ssettings/notification"
+          href="/settings/notification"
           className="flex items-center justify-between"
         >
           <div className="flex items-center gap-3">
@@ -93,7 +93,7 @@ function Settings() {
         </Link>
 
         <Link
-          href="/ssettings/security"
+          href="/settings/security"
           className="flex items-center justify-between"
         >
           <div className="flex items-center gap-3">
@@ -111,7 +111,7 @@ function Settings() {
         </Link>
 
         <Link
-          href="/ssettings/feedback"
+          href="/settings/feedback"
           className="flex items-center justify-between"
         >
           <div className="flex items-center gap-3">
@@ -129,7 +129,7 @@ function Settings() {
         </Link>
 
         <Link
-          href="/ssettings/about"
+          href="/settings/about"
           className="flex items-center justify-between"
         >
           <div className="flex items-center gap-3">
