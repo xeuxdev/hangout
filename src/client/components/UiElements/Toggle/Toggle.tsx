@@ -1,9 +1,11 @@
 "use client"
-
-import { useState } from "react"
-
-function Toggle() {
-  const [defaultValue, setDefaultValue] = useState(false)
+function Toggle({
+  defaultValue,
+  setDefaultValue,
+}: {
+  defaultValue: boolean
+  setDefaultValue: React.Dispatch<React.SetStateAction<boolean>>
+}) {
   return (
     <>
       <div className="relative inline-block w-12 h-6">
