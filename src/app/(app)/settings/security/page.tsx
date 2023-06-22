@@ -1,5 +1,3 @@
-"use client"
-
 import NavHeader from "@/client/components/Navigation/NavHeader"
 import Security from "./Security"
 
