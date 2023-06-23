@@ -5,8 +5,11 @@ export const SignupSchema = z.object({
   email: z.string().email(),
   password: z
     .string({ required_error: "password is required" })
-    .min(8, { message: "password is required" })
-    .regex(passwordRegex, { message: "password is not strong enough" }),
+    .min(8, { message: "password should be at least 8 characters" })
+    .regex(passwordRegex, {
+      message:
+        "password should contain at least one(A-Z,a-z,0-9,!@#$%^&*;:',<>./?)",
+    }),
 })
 export const LoginSchema = z.object({
   email: z.string().email(),

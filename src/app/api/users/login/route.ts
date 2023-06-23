@@ -1,4 +1,4 @@
-import { emailRegex, passwordRegex } from "@/constants/regex"
+import { emailRegex } from "@/constants/regex"
 import { AppResponse } from "@/lib/api/response"
 import dbConnect from "@/lib/db/dbConnect"
 import bcrypt from "bcrypt"
@@ -16,9 +16,6 @@ export async function POST(request: Request) {
 
   if (!emailRegex.test(body.email)) {
     return AppResponse("please enter a valid email", 400)
-  }
-  if (!passwordRegex.test(body.password)) {
-    return AppResponse("please enter a strong password", 400)
   }
 
   const user = await Users.findOne({
