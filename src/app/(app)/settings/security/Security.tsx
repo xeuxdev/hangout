@@ -6,10 +6,13 @@ import { Toggle } from "@/client/components/UiElements"
 import { passwordRegex } from "@/constants/regex"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Modal } from "@mantine/core"
+import { useMutation } from "@tanstack/react-query"
+import { useSession } from "next-auth/react"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
 import { z } from "zod"
+import { changePassword } from "./api"
 
 type ChangePasswordType = {
   currentPassword: string
@@ -19,11 +22,14 @@ type ChangePasswordType = {
 const ChangePasswordSchema = z.object({
   currentPassword: z
     .string()
-    .min(2, { message: "Please enter your old password" }),
+    .min(8, { message: "Please enter your old password" }),
   newPassword: z
     .string()
     .min(8, { message: "Please enter a strong new password" })
-    .regex(passwordRegex),
+    .regex(passwordRegex, {
+      message:
+        "password should contain at least one(A-Z,a-z,0-9,!@#$%^&*;:',<>./?)",
+    }),
 })
 
 function Security() {
@@ -32,6 +38,7 @@ function Security() {
   const [passwordType, setPasswordType] = useState<"password" | "text">(
     "password"
   )
+  const { data: session } = useSession()
 
   const {
     register,
@@ -47,8 +54,27 @@ function Security() {
       : setPasswordType("password")
   }
 
+  const { mutateAsync, error } = useMutation({
+    mutationKey: ["changePassword"],
+    mutationFn: changePassword,
+  })
+
   const onsubmit = (values: ChangePasswordType) => {
-    console.log(values)
+    const payload = {
+      currentPassword: values.currentPassword,
+      newPassword: values.newPassword,
+      access_token: session?.accessToken,
+    }
+
+    mutateAsync(payload)
+      .then((res) => {
+        toast.success(res)
+        setShowChangePasswordModal(false)
+      })
+      .catch(() => {
+        // @ts-ignore
+        error && toast.error(error.response.data.message)
+      })
   }
 
   return (
