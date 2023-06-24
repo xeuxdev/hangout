@@ -2,21 +2,18 @@
 import { calculateAge } from "@/helpers/CalculateAge"
 import { getZodiacSign } from "@/helpers/getZodiacSign"
 import { UserData } from "@/types"
-import { Session } from "next-auth"
 import { useRouter } from "next/navigation"
 import React, { useState } from "react"
 import { motion } from "framer-motion"
 
-function Info({
-  session,
-  userData,
-}: {
-  session: Session | null
-  userData: UserData
-}) {
+function Info({ userData }: { userData: UserData }) {
   const router = useRouter()
 
   const [height, setHeight] = useState<"auto" | "40">("auto")
+
+  // if (userData.message == "not found") {
+  //   router.back()
+  // }
   return (
     <motion.div
       className={`absolute bottom-0 left-0 w-full h-${height} px-5 pt-10 pb-3 rounded-t-3xl bg-primary dark:bg-primary_dark overflow-y-scroll z-50 duration-300`}
@@ -32,7 +29,7 @@ function Info({
         }}
       />
       <h1 className="font-bold text-2xl">
-        {session?.user.name}, {calculateAge(userData.birthday)}
+        {userData.name}, {calculateAge(userData.birthday)}
       </h1>
 
       <div className="flex items-center justify-between">
@@ -65,7 +62,7 @@ function Info({
         <h3 className="mb-4 font-semibold text-lg">Interests</h3>
 
         <div className="flex items-center flex-wrap gap-4">
-          {userData.interests.map((interest) => (
+          {userData.interests?.map((interest) => (
             <div
               key={interest}
               className={`px-4 py-1 rounded-full w-fit ring-2 font-medium bg-pri_btn`}

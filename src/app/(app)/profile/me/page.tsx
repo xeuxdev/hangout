@@ -25,7 +25,7 @@ async function MyProfilePage() {
 
   const userData = res.data as UserData
 
-  console.log(userData)
+  // console.log(userData)
 
   return (
     <>
@@ -41,7 +41,7 @@ async function MyProfilePage() {
 
       {/* info */}
 
-      <Info session={session} userData={userData} />
+      <Info userData={userData} />
     </>
   )
 }
