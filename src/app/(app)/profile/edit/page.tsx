@@ -40,11 +40,13 @@ async function EditProfile() {
         </div>
 
         {/* interests */}
-        <EditInterests userData={userData} />
+        <Suspense>
+          <EditInterests userData={userData} />
+        </Suspense>
 
         {/* profile */}
         <>
-          <div className="flex items-center justify-between pb-10">
+          <div className="flex items-center justify-between">
             <h4 className="font-semibold text-xl mb-5">Your Profile</h4>
             <EditIcon />
           </div>

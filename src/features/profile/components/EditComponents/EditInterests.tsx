@@ -4,8 +4,10 @@ import EditIcon from "@/client/components/Icons/EditIcon"
 import { interests } from "@/constants/interests"
 import { UserData } from "@/types"
 import { Modal } from "@mantine/core"
+import { useMutation } from "@tanstack/react-query"
 import React, { useState } from "react"
 import { toast } from "react-hot-toast"
+import { editInterests } from "../../services/editInterests"
 
 function findIndices(array1: string[], array2: string[]) {
   return array1.map(function (element) {
@@ -19,17 +21,36 @@ function EditInterests({ userData }: { userData: UserData }) {
     findIndices(userData.interests, interests)
   )
 
-  console.log(selectedInterests)
+  // console.log(selectedInterests)
+
+  const { mutateAsync, error } = useMutation({
+    mutationKey: ["edit-Interests"],
+    mutationFn: editInterests,
+  })
 
   const handleSubmit = () => {
     let result = selectedInterests.map((index) => interests[index])
 
-    console.log(result)
+    // console.log(result)
 
     if (result.length == 0) {
       toast.error("Please select an interest")
       return
     }
+
+    const payload = {
+      interests: result,
+      userId: userData._id,
+    }
+
+    mutateAsync(payload)
+      .then((res) => {
+        res && toast.success(res.message)
+        setShowEditInterestsModal(false)
+      })
+      .catch((err) => {
+        error && toast.error(err.response.data.message)
+      })
   }
 
   return (
