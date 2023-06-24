@@ -25,6 +25,8 @@ async function MyProfilePage() {
 
   const userData = res.data as UserData
 
+  console.log(userData)
+
   return (
     <>
       <header className="relative z-20">

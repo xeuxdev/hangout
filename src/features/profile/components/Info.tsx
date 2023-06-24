@@ -57,7 +57,7 @@ function Info({
 
       <div className="my-4">
         <h2 className="mb-4 font-semibold text-lg">About</h2>
-        {/* <p>{}</p> */}
+        <p>{userData.about}</p>
       </div>
 
       {/* interests */}
