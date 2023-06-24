@@ -1,9 +1,9 @@
-import Skeleton from "react-loading-skeleton"
+import { CyclicLoader } from "@/client/components/UiElements"
 
 function EditPageLoader() {
   return (
     <>
-      <Skeleton height={40} />
+      <CyclicLoader />
     </>
   )
 }

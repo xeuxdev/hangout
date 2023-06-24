@@ -1,7 +1,11 @@
 import BackButton from "@/client/components/Buttons/BackButton"
 import EditIcon from "@/client/components/Icons/EditIcon"
 import { LineWave } from "@/client/components/UiElements"
-import { EditImagesSlider, EditInterests } from "@/features/profile"
+import {
+  EditImagesSlider,
+  EditInterests,
+  EditProfile,
+} from "@/features/profile"
 import { authOptions } from "@/lib/auth/authOptions"
 import { UserData } from "@/types"
 import axios from "axios"
@@ -11,7 +15,7 @@ import { Suspense } from "react"
 export const metadata = {
   title: "Edit Profile",
 }
-async function EditProfile() {
+async function EditProfilePage() {
   const session = await getServerSession(authOptions)
 
   const res = await axios(`${process.env.FRONTEND_URL}/api/users/me`, {
@@ -46,31 +50,17 @@ async function EditProfile() {
 
         {/* profile */}
         <>
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <h4 className="font-semibold text-xl mb-5">Your Profile</h4>
             <EditIcon />
-          </div>
-
-          <div className="space-y-3">
-            <p className="rounded-lg bg-input_bg_light dark:bg-input_bg_dark p-3">
-              {userData.name}
-            </p>
-            <p className="rounded-lg bg-input_bg_light dark:bg-input_bg_dark p-3">
-              {userData.userName}
-            </p>
-            {userData.occupation !== "" && (
-              <p className="rounded-lg bg-input_bg_light dark:bg-input_bg_dark p-3">
-                {userData.occupation}
-              </p>
-            )}
-            <p className="rounded-lg bg-input_bg_light dark:bg-input_bg_dark p-3">
-              {userData.about}
-            </p>
-          </div>
+          </div> */}
+          <Suspense>
+            <EditProfile userData={userData} />
+          </Suspense>
         </>
       </div>
     </>
   )
 }
 
-export default EditProfile
+export default EditProfilePage
