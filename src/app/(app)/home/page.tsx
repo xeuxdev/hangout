@@ -1,8 +1,8 @@
-import FilterIcon from "@/client/components/Icons/FilterIcon"
 import { getGreetingTime } from "@/helpers/getGreetingTime"
 import { authOptions } from "@/lib/auth/authOptions"
 import { getServerSession } from "next-auth"
 import Image from "next/image"
+import Filter from "./Filter"
 
 export const metadata = {
   title: "Home",
@@ -13,7 +13,7 @@ async function HomePage() {
   const session = await getServerSession(authOptions)
   return (
     <>
-      <header className="flex items-center justify-between">
+      <header className="flex items-center justify-between lg:pr-20">
         <div className="flex items-center gap-4">
           {session?.user.image == "" || session?.user.image == undefined ? (
             <Image
@@ -39,7 +39,7 @@ async function HomePage() {
           </div>
         </div>
         <div>
-          <FilterIcon />
+          <Filter />
         </div>
       </header>
     </>
