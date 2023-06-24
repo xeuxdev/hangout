@@ -1,36 +1,36 @@
 import BackButton from "@/client/components/Buttons/BackButton"
 import { ImageSlider, Info } from "@/features/profile"
 import { UserData } from "@/types"
+import { redirect } from "next/navigation"
 import { Suspense } from "react"
 
-export async function generateMetadata(params: { username: string }) {
-  const res = await fetch(
-    `${process.env.FRONTEND_URL}/api/users/profile/${params.username}`,
-    {
-      method: "GET",
-    }
-  )
+export async function generateMetadata({
+  params,
+}: {
+  params: { username: string }
+}) {
+  const user = (await fetch(
+    `${process.env.FRONTEND_URL}/api/users/profile/${params.username}`
+  ).then((res) => {
+    return res.json()
+  })) as UserData
 
-  const userData = (await res.json()) as UserData
   return {
-    title: userData?.userName + " " + "Profile",
-    description: userData.about,
+    title: user?.userName + " " + "Profile",
+    description: user.about,
   }
 }
 
 async function PeepsProfilePage({ params }: { params: { username: string } }) {
-  console.log(params)
-
   const res = await fetch(
-    `${process.env.FRONTEND_URL}/api/users/profile/${params.username}`,
-    {
-      method: "GET",
-    }
+    `${process.env.FRONTEND_URL}/api/users/profile/${params.username}`
   )
 
   const userData = (await res.json()) as UserData
 
-  //   console.log(userData)
+  if (!userData.userName) {
+    redirect("/home")
+  }
 
   return (
     <>
