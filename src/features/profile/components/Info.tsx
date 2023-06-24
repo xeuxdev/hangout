@@ -4,7 +4,8 @@ import { getZodiacSign } from "@/helpers/getZodiacSign"
 import { UserData } from "@/types"
 import { Session } from "next-auth"
 import { useRouter } from "next/navigation"
-import React from "react"
+import React, { useState } from "react"
+import { motion } from "framer-motion"
 
 function Info({
   session,
@@ -14,8 +15,22 @@ function Info({
   userData: UserData
 }) {
   const router = useRouter()
+
+  const [height, setHeight] = useState<"auto" | "40">("auto")
   return (
-    <div className="absolute bottom-0 left-0 w-full px-5 pt-10 pb-3 rounded-t-3xl bg-primary dark:bg-primary_dark overflow-y-scroll z-50">
+    <motion.div
+      className={`absolute bottom-0 left-0 w-full h-${height} px-5 pt-10 pb-3 rounded-t-3xl bg-primary dark:bg-primary_dark overflow-y-scroll z-50 duration-300`}
+      animate={{
+        height: height == "40" ? "auto" : 160,
+      }}
+      transition={{ duration: 0.3 }}
+    >
+      <div
+        className="absolute top-5 left-1/2 mx-auto w-5 h-1 bg-pri_btn"
+        onClick={() => {
+          height === "auto" ? setHeight("40") : setHeight("auto")
+        }}
+      />
       <h1 className="font-bold text-2xl">
         {session?.user.name}, {calculateAge(userData.birthday)}
       </h1>
@@ -60,7 +75,7 @@ function Info({
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
