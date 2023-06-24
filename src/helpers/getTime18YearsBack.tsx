@@ -4,7 +4,7 @@ export function getTime18YearsBack() {
   var month = currentDate.getMonth() + 1
   var day = currentDate.getDate()
   let currMonth
-  let currDay
+  let currDay = `${day}`
 
   if (month < 10) {
     currMonth = "0" + month
