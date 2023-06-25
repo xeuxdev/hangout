@@ -1,8 +1,10 @@
 import { getGreetingTime } from "@/helpers/getGreetingTime"
 import { authOptions } from "@/lib/auth/authOptions"
 import { getServerSession } from "next-auth"
-import Image from "next/image"
 import Filter from "./Filter"
+import axios from "axios"
+import { UserData } from "@/types"
+import { ProfileImage } from "@/features/profile"
 
 export const metadata = {
   title: "Home",
@@ -11,27 +13,19 @@ export const metadata = {
 
 async function HomePage() {
   const session = await getServerSession(authOptions)
+
+  const res = await axios(`${process.env.FRONTEND_URL}/api/users/me`, {
+    headers: {
+      Authorization: "Bearer " + session?.accessToken,
+    },
+  })
+
+  const userData = res.data as UserData
   return (
     <>
       <header className="flex items-center justify-between lg:pr-20">
         <div className="flex items-center gap-4">
-          {session?.user.image == "" || session?.user.image == undefined ? (
-            <Image
-              src={`https://api.multiavatar.com/${session?.user.userName}.svg`}
-              alt={session?.user.name + "image"}
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-          ) : (
-            <Image
-              src={session?.user.image as string}
-              alt={session?.user.name + "image"}
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-          )}
+          <ProfileImage width={40} userData={userData} />
 
           <div>
             <p className="">{getGreetingTime()}👋</p>
