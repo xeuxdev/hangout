@@ -1,5 +1,4 @@
 import BackButton from "@/client/components/Buttons/BackButton"
-import EditIcon from "@/client/components/Icons/EditIcon"
 import { LineWave } from "@/client/components/UiElements"
 import {
   EditImagesSlider,
@@ -44,19 +43,15 @@ async function EditProfilePage() {
         </div>
 
         {/* interests */}
-        <Suspense>
+        <>
           <EditInterests userData={userData} />
-        </Suspense>
+        </>
 
         {/* profile */}
         <>
-          {/* <div className="flex items-center justify-between">
-            <h4 className="font-semibold text-xl mb-5">Your Profile</h4>
-            <EditIcon />
-          </div> */}
-          <Suspense>
+          <>
             <EditProfile userData={userData} />
-          </Suspense>
+          </>
         </>
       </div>
     </>

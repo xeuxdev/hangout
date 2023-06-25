@@ -65,7 +65,7 @@ function Filter() {
                       onClick={() => {
                         setSelectedGender(gender)
                       }}
-                      extraStyle="px-3 h-10"
+                      extraStyle="px-3 h-9"
                     />
                   ))}
                 </div>

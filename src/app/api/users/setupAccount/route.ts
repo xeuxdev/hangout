@@ -1,5 +1,6 @@
 import { AppResponse } from "@/lib/api/response"
 import dbConnect from "@/lib/db/dbConnect"
+import ImagesModel from "@/server/models/Images.model"
 import Users from "@/server/models/Users.model"
 
 type SETUPPROPS = {
@@ -49,6 +50,13 @@ export async function POST(request: Request) {
   const res = await user.save()
 
   if (res) {
+    Promise.resolve(
+      ImagesModel.create({
+        userId: userId,
+        userName: userName,
+        profileImage: user.image,
+      })
+    )
     return AppResponse("Profile setup successful", 200)
   } else {
     return AppResponse("Profile setup failed", 500)
