@@ -59,7 +59,7 @@ function EditProfile({ userData }: { userData: UserData }) {
   return (
     <>
       <div className="flex items-center justify-between">
-        <h4 className="font-semibold text-xl mb-5">Your Profile Info</h4>
+        <h5 className="font-semibold text-xl mb-5">Your Profile Info</h5>
         <span onClick={() => setShowEditProfile(true)}>
           <EditIcon />
         </span>

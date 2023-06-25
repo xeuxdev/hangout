@@ -5,6 +5,9 @@ import Image from "next/image"
 import Link from "next/link"
 import LogOut from "./LogOut"
 import { authOptions } from "@/lib/auth/authOptions"
+import axios from "axios"
+import { UserData } from "@/types"
+import { ProfileImage } from "@/features/profile"
 
 export async function generateMetadata() {
   const session = await getServerSession(authOptions)
@@ -16,6 +19,14 @@ export async function generateMetadata() {
 async function ProfilePage() {
   const session = await getServerSession(authOptions)
 
+  const res = await axios(`${process.env.FRONTEND_URL}/api/users/me`, {
+    headers: {
+      Authorization: "Bearer " + session?.accessToken,
+    },
+  })
+
+  const userData = res.data as UserData
+
   return (
     <div className="max-w-lg mx-auto pb-20">
       <h1 className="text-2xl font-semibold tracking-wide">Profile</h1>
@@ -23,32 +34,22 @@ async function ProfilePage() {
       {/* profile */}
       <Link
         href={"/profile/me"}
-        className="mt-16 mb-10 flex items-center gap-7"
+        className="mt-16 mb-10 flex items-center justify-between"
       >
-        <div>
-          {session?.user.image == "" || session?.user.image == undefined ? (
-            <Image
-              src={`https://api.multiavatar.com/${session?.user.userName}.svg`}
-              alt={session?.user.name + "image"}
-              width={50}
-              height={50}
-              className="rounded-full object-fill mx-auto"
-            />
-          ) : (
-            <Image
-              src={session?.user.image as string}
-              alt={session?.user.name + "image"}
-              width={50}
-              height={50}
-              className="rounded-full object-fill mx-auto"
-            />
-          )}
+        <div className="flex items-center gap-7">
+          {/* image */}
+          <div>
+            <ProfileImage userData={userData} width={50} />
+          </div>
+
+          {/* name and username */}
+          <div className="space-y-1.5">
+            <h2 className="font-medium text-lg">{session?.user.name}</h2>
+            <p className="">{session?.user.userName}</p>
+          </div>
         </div>
 
-        <div className="space-y-1.5">
-          <h2 className="font-medium text-lg">{session?.user.name}</h2>
-          <p className="">{session?.user.userName}</p>
-        </div>
+        <ChevronRight />
       </Link>
 
       {/* bulaba */}

@@ -4,6 +4,7 @@ import {
   EditImagesSlider,
   EditInterests,
   EditProfile,
+  EditProfileImage,
 } from "@/features/profile"
 import { authOptions } from "@/lib/auth/authOptions"
 import { UserData } from "@/types"
@@ -34,9 +35,13 @@ async function EditProfilePage() {
       </header>
 
       <div className="space-y-7 pb-20">
+        <>
+          <EditProfileImage userData={userData} />
+        </>
+
         {/* photos */}
         <div>
-          <h2 className="font-semibold text-xl mb-5">Your Best Photos</h2>
+          <h3 className="font-semibold text-xl mb-5">Your Best Photos</h3>
           <Suspense fallback={<LineWave />}>
             <EditImagesSlider />
           </Suspense>
@@ -48,10 +53,9 @@ async function EditProfilePage() {
         </>
 
         {/* profile */}
+
         <>
-          <>
-            <EditProfile userData={userData} />
-          </>
+          <EditProfile userData={userData} />
         </>
       </div>
     </>

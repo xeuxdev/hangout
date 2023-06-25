@@ -56,7 +56,7 @@ function EditInterests({ userData }: { userData: UserData }) {
   return (
     <>
       <div className="flex items-center justify-between">
-        <h3 className="font-semibold text-xl mb-5">Your Interests</h3>
+        <h4 className="font-semibold text-xl mb-5">Your Interests</h4>
         <span onClick={() => setShowEditInterestsModal(true)}>
           <EditIcon />
         </span>
