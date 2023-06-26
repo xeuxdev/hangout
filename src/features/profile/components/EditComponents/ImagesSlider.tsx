@@ -3,18 +3,19 @@
 import EditIcon from "@/client/components/Icons/EditIcon"
 import { Carousel } from "@mantine/carousel"
 import Image from "next/image"
+import UploadPictureForm from "../../Forms/UploadPictureForm"
 
-function EditImagesSlider() {
+function EditImagesSlider({ images }: { images: String[] }) {
+  // console.log(images.length)
   return (
     <>
       <Carousel slideSize="50%" height={200} slideGap="md" withControls={false}>
-        {Array(4)
-          .fill(0)
-          ?.map((_, index) => (
-            <Carousel.Slide key={index}>
-              <div className=" w-40 h-[12.25rem] relative">
+        {images.map((img, index) => (
+          <Carousel.Slide key={index}>
+            <div className=" w-40 h-[12.25rem] relative">
+              <>
                 <Image
-                  src={`/images/${index}.jpg`}
+                  src={`${img}`}
                   alt={"image" + index}
                   fill
                   className="object-fill"
@@ -22,9 +23,18 @@ function EditImagesSlider() {
                 <div className="absolute bottom-2 right-2">
                   <EditIcon />
                 </div>
-              </div>
-            </Carousel.Slide>
+              </>
+            </div>
+          </Carousel.Slide>
+        ))}
+
+        {images.length == 0 ||
+          (images.length < 4 && (
+            <div className="w-40 h-[12.25rem] relative">
+              <UploadPictureForm />
+            </div>
           ))}
+
         {/* ...slides */}
       </Carousel>
     </>

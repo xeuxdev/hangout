@@ -4,7 +4,7 @@ const ImagesSchema = new mongoose.Schema(
   {
     userId: { type: String, required: true },
     userName: { type: String, required: true },
-    images: { type: Array, default: [""] },
+    images: { type: Array, default: [] },
     profileImage: { type: String, default: "" },
   },
   {

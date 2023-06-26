@@ -26,6 +26,12 @@ async function EditProfilePage() {
 
   const userData = res.data as UserData
 
+  const img = await axios(
+    `${process.env.FRONTEND_URL}/api/users/profile/${session?.user.userName}/images`
+  )
+
+  const imgData = (await img.data) as { images: string[] }
+
   return (
     <>
       <header className="flex items-center gap-5 mb-10">
@@ -43,7 +49,7 @@ async function EditProfilePage() {
         <div>
           <h3 className="font-semibold text-xl mb-5">Your Best Photos</h3>
           <Suspense fallback={<LineWave />}>
-            <EditImagesSlider />
+            <EditImagesSlider images={imgData.images} />
           </Suspense>
         </div>
 
