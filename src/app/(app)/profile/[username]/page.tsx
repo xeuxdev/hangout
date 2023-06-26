@@ -28,6 +28,12 @@ async function PeepsProfilePage({ params }: { params: { username: string } }) {
 
   const userData = (await res.json()) as UserData
 
+  const img = await fetch(
+    `${process.env.FRONTEND_URL}/api/users/profile/${params.username}/images`
+  )
+
+  const imgData = (await img.json()) as { images: string[] }
+
   if (!userData.userName) {
     redirect("/home")
   }
@@ -40,7 +46,7 @@ async function PeepsProfilePage({ params }: { params: { username: string } }) {
 
       <div>
         <Suspense fallback={<div>loading.....</div>}>
-          <ImageSlider />
+          <ImageSlider images={imgData.images} />
         </Suspense>
       </div>
 

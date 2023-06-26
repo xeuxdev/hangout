@@ -35,7 +35,8 @@ function ImageSlider({ images }: { images: String[] }) {
           },
         }}
       >
-        {images.map((img, index) => (
+        {!images && <div className="pt-28">No image yet</div>}
+        {images?.map((img, index) => (
           <Carousel.Slide key={index}>
             <div className=" min-w-screen h-[31.25rem] lg:h-[25rem] relative">
               {img === "" ? (
