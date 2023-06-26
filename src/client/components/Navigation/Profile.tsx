@@ -66,14 +66,14 @@ const Profile = () => {
               id="user-dropdown"
               ref={dropdownRef}
             >
-              <div className="px-4 py-3">
+              <Link href={"/home"} className="px-4 py-3">
                 <span className="block text-sm text-gray-900 dark:text-white capitalize">
                   {user?.userName}
                 </span>
                 <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
                   {user?.email}
                 </span>
-              </div>
+              </Link>
               <ul className="py-1" aria-labelledby="user-menu-button">
                 {/* nav links */}
                 {NavLinks.map((link) => (

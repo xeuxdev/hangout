@@ -5,6 +5,7 @@ import Filter from "./Filter"
 import axios from "axios"
 import { UserData } from "@/types"
 import { ProfileImage } from "@/features/profile"
+import Text from "@/client/components/Typography/Text"
 
 export const metadata = {
   title: "Home",
@@ -21,6 +22,14 @@ async function HomePage() {
   })
 
   const userData = res.data as UserData
+
+  const users = (await axios(`${process.env.FRONTEND_URL}/api/users/all`).then(
+    (res) => {
+      return res.data
+    }
+  )) as UserData[]
+
+  console.log(users)
   return (
     <>
       <header className="flex items-center justify-between lg:pr-20">
@@ -36,6 +45,19 @@ async function HomePage() {
           <Filter />
         </div>
       </header>
+
+      <section className="pt-5 pb-14">
+        {users.map((user, index) => (
+          <div key={user._id}>
+            <Text
+              content={user.name}
+              font="bold"
+              size="lg"
+              extraStyle="text-red-500"
+            />
+          </div>
+        ))}
+      </section>
     </>
   )
 }
