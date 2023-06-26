@@ -1,4 +1,5 @@
 "use client"
+import { LilCard } from "@/client/components/Cards"
 import Text from "@/client/components/Typography/Text"
 import { useMediaQuery } from "@/client/hooks/useMediaQuery"
 import { calculateAge } from "@/helpers/CalculateAge"
@@ -59,6 +60,7 @@ function Slider({ users }: { users: UserData[] }) {
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-48 bg-gradient-to-t from-pri_btn to-pri_btn/20 opacity-40 blur" />
 
                 <div className="absolute bottom-16 left-0 w-full flex items-center justify-between px-5">
+                  {/* info */}
                   <div className="flex gap-3 flex-col">
                     <div className="flex items-center gap-3">
                       <Text content={user.name} font="bold" size="xl" />
@@ -71,6 +73,9 @@ function Slider({ users }: { users: UserData[] }) {
 
                     <Text content={user.occupation} size="sm" font="medium" />
                   </div>
+
+                  {/* disance */}
+                  <LilCard content="2km" variant="filled" />
                 </div>
               </div>
             </Link>
