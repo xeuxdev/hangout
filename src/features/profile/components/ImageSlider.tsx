@@ -4,8 +4,10 @@ import { Carousel } from "@mantine/carousel"
 import { rem } from "@mantine/core"
 import Image from "next/image"
 
-function ImageSlider() {
+function ImageSlider({ images }: { images: String[] }) {
   const matches = useMediaQuery("(min-width: 768px)")
+
+  // console.log(images)
 
   return (
     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-lg ">
@@ -33,20 +35,25 @@ function ImageSlider() {
           },
         }}
       >
-        {Array(4)
-          .fill(0)
-          ?.map((_, index) => (
-            <Carousel.Slide key={index}>
-              <div className=" min-w-screen h-[31.25rem] lg:h-[25rem] relative">
+        {images.map((img, index) => (
+          <Carousel.Slide key={index}>
+            <div className=" min-w-screen h-[31.25rem] lg:h-[25rem] relative">
+              {img === "" ? (
+                <div className="flex items-center justify-center h-full">
+                  No Image
+                </div>
+              ) : (
                 <Image
-                  src={`/images/${index}.jpg`}
+                  src={`${img}`}
                   alt={"image" + index}
                   fill
                   className="object-fill"
                 />
-              </div>
-            </Carousel.Slide>
-          ))}
+              )}
+            </div>
+          </Carousel.Slide>
+        ))}
+
         {/* ...slides */}
       </Carousel>
     </div>

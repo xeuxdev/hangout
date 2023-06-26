@@ -22,10 +22,13 @@ async function MyProfilePage() {
       Authorization: "Bearer " + session?.accessToken,
     },
   })
-
   const userData = res.data as UserData
 
-  // console.log(userData)
+  const img = await axios(
+    `${process.env.FRONTEND_URL}/api/users/profile/${session?.user.userName}/images`
+  )
+
+  const imgData = (await img.data) as { images: string[] }
 
   return (
     <>
@@ -35,7 +38,7 @@ async function MyProfilePage() {
 
       <div>
         <Suspense fallback={<div>loading.....</div>}>
-          <ImageSlider />
+          <ImageSlider images={imgData.images} />
         </Suspense>
       </div>
 
