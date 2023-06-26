@@ -4,7 +4,7 @@ type TypographyProps = React.FunctionComponent<
   React.HTMLAttributes<HTMLParagraphElement> & {
     content: string
     size: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl"
-    font: "bold" | "semibold" | "medium" | "regular"
+    font: "bold" | "semibold" | "medium" | "normal"
     children?: React.ReactNode
     extraStyle?: string
   }
@@ -13,14 +13,14 @@ type TypographyProps = React.FunctionComponent<
 const Text: TypographyProps = ({
   content,
   size,
-  font = "regular",
+  font = "normal",
   children,
   extraStyle,
   ...rest
 }: {
   content: string
   size: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl"
-  font: "bold" | "semibold" | "medium" | "regular"
+  font: "bold" | "semibold" | "medium" | "normal"
   children?: React.ReactNode
   extraStyle?: string
 }) => {

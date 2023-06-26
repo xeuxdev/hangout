@@ -5,7 +5,7 @@ import Filter from "./Filter"
 import axios from "axios"
 import { UserData } from "@/types"
 import { ProfileImage } from "@/features/profile"
-import Text from "@/client/components/Typography/Text"
+import Slider from "./Slider"
 
 export const metadata = {
   title: "Home",
@@ -29,7 +29,9 @@ async function HomePage() {
     }
   )) as UserData[]
 
-  console.log(users)
+  const filteredUsers = users.filter((user) => user._id !== session?.user.id)
+
+  // console.log(users)
   return (
     <>
       <header className="flex items-center justify-between lg:pr-20">
@@ -38,7 +40,7 @@ async function HomePage() {
 
           <div>
             <p className="">{getGreetingTime()}👋</p>
-            <p className="font-bold text-xl">{session?.user.name}</p>
+            <h1 className="font-bold text-xl">{session?.user.name}</h1>
           </div>
         </div>
         <div>
@@ -47,16 +49,7 @@ async function HomePage() {
       </header>
 
       <section className="pt-5 pb-14">
-        {users.map((user, index) => (
-          <div key={user._id}>
-            <Text
-              content={user.name}
-              font="bold"
-              size="lg"
-              extraStyle="text-red-500"
-            />
-          </div>
-        ))}
+        <Slider users={filteredUsers} />
       </section>
     </>
   )
