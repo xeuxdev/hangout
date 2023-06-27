@@ -1,23 +1,21 @@
 import ChevronRight from "@/client/components/Icons/ChevronRight"
 import ThemeToggle from "./ThemeToggle"
-import { getServerSession } from "next-auth"
-import Image from "next/image"
 import Link from "next/link"
 import LogOut from "./LogOut"
-import { authOptions } from "@/lib/auth/authOptions"
 import axios from "axios"
 import { UserData } from "@/types"
 import { ProfileImage } from "@/features/profile"
+import { serverSession } from "@/lib/auth/serverSession"
 
 export async function generateMetadata() {
-  const session = await getServerSession(authOptions)
+  const session = await serverSession()
   return {
     title: session?.user.userName + " " + "Profile",
     description: "Find your dates",
   }
 }
 async function ProfilePage() {
-  const session = await getServerSession(authOptions)
+  const session = await serverSession()
 
   const res = await axios(`${process.env.FRONTEND_URL}/api/users/me`, {
     headers: {
