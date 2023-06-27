@@ -1,6 +1,5 @@
 import { UserData } from "@/types"
 import Image from "next/image"
-import React from "react"
 
 function ProfileImage({
   userData,
@@ -10,14 +9,14 @@ function ProfileImage({
   width: number
 }) {
   return (
-    <div className="relative">
+    <div>
       {userData.image == "" || userData.image == undefined ? (
         <Image
           src={`https://api.multiavatar.com/${userData.userName}.svg`}
           alt={userData.name + "image"}
           width={width}
           height={width}
-          className="rounded-full object-fill mx-auto"
+          className="rounded-full object-cover mx-auto"
         />
       ) : (
         <Image

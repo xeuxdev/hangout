@@ -33,9 +33,9 @@ async function ProfilePage() {
       >
         <div className="flex items-center gap-7">
           {/* image */}
-          <div>
+          <>
             <ProfileImage userData={userData} width={50} />
-          </div>
+          </>
 
           {/* name and username */}
           <div className="space-y-1.5">
