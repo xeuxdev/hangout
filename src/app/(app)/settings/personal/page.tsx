@@ -10,12 +10,9 @@ export const metadata = {
 
 async function page() {
   const session = await serverSession()
-  const result = await fetch(process.env.FRONTEND_URL + "/api/users/me", {
-    method: "GET",
-    headers: {
-      authorization: `Bearer ${session?.accessToken}`,
-    },
-  })
+  const result = await fetch(
+    process.env.FRONTEND_URL + "/api/users/" + session?.user.userName
+  )
   const data = (await result.json()) as UserProfile
 
   //   console.log(data)

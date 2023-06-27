@@ -1,11 +1,10 @@
 import { getGreetingTime } from "@/helpers/getGreetingTime"
-import { authOptions } from "@/lib/auth/authOptions"
-import { getServerSession } from "next-auth"
 import Filter from "./Filter"
 import axios from "axios"
 import { UserData } from "@/types"
 import { ProfileImage } from "@/features/profile"
 import Slider from "./Slider"
+import { serverSession } from "@/lib/auth/serverSession"
 
 export const metadata = {
   title: "Home",
@@ -13,15 +12,15 @@ export const metadata = {
 }
 
 async function HomePage() {
-  const session = await getServerSession(authOptions)
+  const session = await serverSession()
 
-  const res = await axios(`${process.env.FRONTEND_URL}/api/users/me`, {
-    headers: {
-      Authorization: "Bearer " + session?.accessToken,
-    },
-  })
+  const userData = (await axios(
+    `${process.env.FRONTEND_URL}/api/users/${session?.user.userName}`
+  ).then((res) => {
+    return res.data
+  })) as UserData
 
-  const userData = res.data as UserData
+  // const userData = res.data as UserData
 
   const users = (await axios(`${process.env.FRONTEND_URL}/api/users/all`).then(
     (res) => {

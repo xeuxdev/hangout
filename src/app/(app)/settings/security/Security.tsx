@@ -6,7 +6,7 @@ import { Toggle } from "@/client/components/UiElements"
 import { passwordRegex } from "@/constants/regex"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Modal } from "@mantine/core"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import { useSession } from "next-auth/react"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
@@ -54,6 +54,17 @@ function Security() {
       : setPasswordType("password")
   }
 
+  const { data: userInfo } = useQuery({
+    queryKey: ["getUser"],
+    queryFn: async () => {
+      const res = await fetch(
+        `${process.env.FRONTEND_URL}/api/users/${session?.user.userName}`
+      )
+
+      return res.json()
+    },
+  })
+
   const { mutateAsync, error } = useMutation({
     mutationKey: ["changePassword"],
     mutationFn: changePassword,
@@ -89,7 +100,11 @@ function Security() {
         <Button
           content="Change Password"
           variant="empty"
-          onClick={() => setShowChangePasswordModal(true)}
+          onClick={() => {
+            userInfo?.password
+              ? setShowChangePasswordModal(true)
+              : toast("you can't change password for this account")
+          }}
         />
       </section>
 

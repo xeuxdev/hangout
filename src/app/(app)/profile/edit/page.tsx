@@ -18,11 +18,9 @@ export const metadata = {
 async function EditProfilePage() {
   const session = await getServerSession(authOptions)
 
-  const res = await axios(`${process.env.FRONTEND_URL}/api/users/me`, {
-    headers: {
-      Authorization: "Bearer " + session?.accessToken,
-    },
-  })
+  const res = await axios(
+    `${process.env.FRONTEND_URL}/api/users/${session?.user?.userName}`
+  )
 
   const userData = res.data as UserData
 

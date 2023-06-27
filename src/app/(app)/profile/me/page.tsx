@@ -1,13 +1,11 @@
 import BackButton from "@/client/components/Buttons/BackButton"
 import { ImageSlider, Info } from "@/features/profile"
-import { authOptions } from "@/lib/auth/authOptions"
+import { serverSession } from "@/lib/auth/serverSession"
 import { UserData } from "@/types"
-import axios from "axios"
-import { getServerSession } from "next-auth"
 import { Suspense } from "react"
 
 export async function generateMetadata() {
-  const session = await getServerSession(authOptions)
+  const session = await serverSession()
   return {
     title: session?.user.userName + " " + "Profile",
     description: "Your Profile Info",
@@ -15,20 +13,21 @@ export async function generateMetadata() {
 }
 
 async function MyProfilePage() {
-  const session = await getServerSession(authOptions)
+  const session = await serverSession()
 
-  const res = await axios(`${process.env.FRONTEND_URL}/api/users/me`, {
-    headers: {
-      Authorization: "Bearer " + session?.accessToken,
-    },
-  })
-  const userData = res.data as UserData
+  const userData = (await fetch(
+    `${process.env.FRONTEND_URL}/api/users/${session?.user.userName}`
+  ).then((response) => {
+    return response.json()
+  })) as UserData
 
-  const img = await axios(
+  const imgData = (await fetch(
     `${process.env.FRONTEND_URL}/api/users/profile/${session?.user.userName}/images`
-  )
+  ).then((response) => {
+    return response.json()
+  })) as { images: string[] }
 
-  const imgData = (await img.data) as { images: string[] }
+  // const imgData = (await img.data) as { images: string[] }
 
   return (
     <>

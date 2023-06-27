@@ -2,7 +2,6 @@ import ChevronRight from "@/client/components/Icons/ChevronRight"
 import ThemeToggle from "./ThemeToggle"
 import Link from "next/link"
 import LogOut from "./LogOut"
-import axios from "axios"
 import { UserData } from "@/types"
 import { ProfileImage } from "@/features/profile"
 import { serverSession } from "@/lib/auth/serverSession"
@@ -17,13 +16,11 @@ export async function generateMetadata() {
 async function ProfilePage() {
   const session = await serverSession()
 
-  const res = await axios(`${process.env.FRONTEND_URL}/api/users/me`, {
-    headers: {
-      Authorization: "Bearer " + session?.accessToken,
-    },
-  })
-
-  const userData = res.data as UserData
+  const userData = (await fetch(
+    `${process.env.FRONTEND_URL}/api/users/${session?.user.userName}`
+  ).then((response) => {
+    return response.json()
+  })) as UserData
 
   return (
     <div className="max-w-lg mx-auto pb-20">
