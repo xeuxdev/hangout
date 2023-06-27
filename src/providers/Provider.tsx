@@ -22,7 +22,7 @@ function Providers({ children }: { children: React.ReactNode }) {
     <SessionProvider>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider attribute="class">
-          <SkeletonTheme baseColor="#202020" highlightColor="#444">
+          <SkeletonTheme baseColor="#E8E8E8" highlightColor="##E8E8E8">
             {children}
           </SkeletonTheme>
         </ThemeProvider>

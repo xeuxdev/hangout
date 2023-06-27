@@ -63,15 +63,26 @@ function Slider({ users }: { users: UserData[] }) {
                   {/* info */}
                   <div className="flex gap-3 flex-col">
                     <div className="flex items-center gap-3">
-                      <Text content={user.name} font="bold" size="xl" />
+                      <Text
+                        content={user.name}
+                        font="bold"
+                        size="xl"
+                        extraStyle="text-white"
+                      />
                       <Text
                         content={`${calculateAge(user.birthday)}`}
                         font="bold"
                         size="xl"
+                        extraStyle="text-white"
                       />
                     </div>
 
-                    <Text content={user.occupation} size="sm" font="medium" />
+                    <Text
+                      content={user.occupation}
+                      size="sm"
+                      font="medium"
+                      extraStyle="text-white"
+                    />
                   </div>
 
                   {/* disance */}

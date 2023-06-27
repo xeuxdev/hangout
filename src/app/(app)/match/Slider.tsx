@@ -35,15 +35,22 @@ function Slider({ users }: { users: UserData[] }) {
                       content={user.name.split(" ")[0]}
                       font="bold"
                       size="xl"
+                      extraStyle="text-white"
                     />
                     <Text
                       content={`${calculateAge(user.birthday)}`}
                       font="bold"
                       size="xl"
+                      extraStyle="text-white"
                     />
                   </div>
 
-                  <Text content={user.occupation} size="sm" font="medium" />
+                  <Text
+                    content={user.occupation}
+                    size="sm"
+                    font="medium"
+                    extraStyle="text-white"
+                  />
                 </div>
               </div>
             </div>

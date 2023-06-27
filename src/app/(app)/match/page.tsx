@@ -46,7 +46,7 @@ async function MatchPage() {
 
       <section className="pb-20 relative">
         <header className="flex items-center justify-between mb-6">
-          <h1 className="font-bold text-lg">Your Match</h1>
+          <h2 className="font-bold text-lg">Your Match</h2>
           <Link href={"/match/your-match"} className="text-pri_btn">
             See All
           </Link>
