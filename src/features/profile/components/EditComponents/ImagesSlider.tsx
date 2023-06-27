@@ -28,12 +28,11 @@ function EditImagesSlider({ images }: { images: String[] }) {
           </Carousel.Slide>
         ))}
 
-        {images.length == 0 ||
-          (images.length < 4 && (
-            <div className="w-40 h-[12.25rem] relative">
-              <UploadPictureForm />
-            </div>
-          ))}
+        {(images.length == 0 || images.length < 4) && (
+          <div className="w-40 h-[12.25rem] relative">
+            <UploadPictureForm />
+          </div>
+        )}
 
         {/* ...slides */}
       </Carousel>
