@@ -17,7 +17,7 @@ function Slider({ users }: { users: UserData[] }) {
       {users?.map((user, index) => (
         <Carousel.Slide key={index}>
           <Link href={`/profile/${user.userName}`}>
-            <div className=" w-56 h-[19rem] relative overflow-hidden">
+            <div className="h-full w-56 max-h-[19rem] relative overflow-hidden">
               <Image
                 src={`${user.image}`}
                 alt={"image" + index}
