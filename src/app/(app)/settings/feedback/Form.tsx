@@ -2,9 +2,13 @@
 
 import { SubmitButton } from "@/client/components/Buttons"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useMutation } from "@tanstack/react-query"
+import { useSession } from "next-auth/react"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { sendFeedback } from "./api"
+import { toast } from "react-hot-toast"
 
 type FeedbackType = {
   feedback: string
@@ -18,6 +22,7 @@ const feedbackSchema = z.object({
 
 function FeedbackForm() {
   const [filledStars, setFilledStars] = useState(1)
+  const { data: session } = useSession()
 
   const {
     handleSubmit,
@@ -28,12 +33,26 @@ function FeedbackForm() {
     resolver: zodResolver(feedbackSchema),
   })
 
+  const { mutateAsync, error, isLoading } = useMutation({
+    mutationKey: ["feedback"],
+    mutationFn: sendFeedback,
+  })
+
   const onsubmit = (data: FeedbackType) => {
     const payload = {
       feedback: data.feedback,
       rating: filledStars,
+      userName: session?.user.userName,
     }
     console.log(payload)
+
+    mutateAsync(payload)
+      .then((response) => {
+        response && toast.success(response.message)
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message)
+      })
   }
 
   return (
@@ -75,7 +94,10 @@ function FeedbackForm() {
           </>
         </div>
 
-        <SubmitButton content="Submit feedback" variant="filled" />
+        <SubmitButton
+          content={isLoading ? "Sending feedback" : "Submit feedback"}
+          variant="filled"
+        />
       </form>
     </div>
   )
