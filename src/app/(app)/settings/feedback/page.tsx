@@ -11,7 +11,7 @@ function Feedback() {
     <>
       <NavHeader content="Feedback" />
 
-      <section className="max-w-lg mx-auto space-y-7">
+      <section className="max-w-lg mx-auto space-y-7 pb-10">
         <div>
           <header className="font-medium text-lg">
             Please Share your feedback
