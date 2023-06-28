@@ -1,10 +1,15 @@
+import { SearchIcon } from "@/client/components/Icons"
+import NavHeader from "@/client/components/Navigation/NavHeader"
 import Skeleton from "react-loading-skeleton"
 
 function ChatsLoader() {
   return (
     <>
       <div className="flex items-center justify-between">
-        <Skeleton height={30} />
+        <NavHeader content="Chats" />
+        <div className="-mt-10">
+          <SearchIcon />
+        </div>
       </div>
 
       <section>
