@@ -9,13 +9,15 @@ function Faq() {
 
   const searchProps = { searchQuery, setSearchQuery }
 
-  const filterFaq = FAQS.filter((faq) => faq.question.includes(searchQuery))
+  const filterFaq = FAQS.filter((faq) =>
+    faq.question.includes(searchQuery.toLowerCase())
+  )
 
   return (
     <>
       <Search {...searchProps} />
 
-      <div>
+      <div className="pb-10">
         <Accordion defaultValue="">
           {filterFaq.map((faq, index) => (
             <Accordion.Item value={faq.question} key={faq.question + index}>
