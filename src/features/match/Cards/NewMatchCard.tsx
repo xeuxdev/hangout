@@ -12,7 +12,7 @@ function NewMatchCard({ user }: { user: UserData }) {
           src={`${user.image}`}
           alt={user.name + "image"}
           fill
-          className="rounded-3xl"
+          className="rounded-xl"
         />
 
         <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-full h-24 bg-gradient-to-t from-[#9610FF] to-purple-800 opacity-75 blur-lg" />
