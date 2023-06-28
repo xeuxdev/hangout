@@ -1,7 +1,7 @@
 import { getGreetingTime } from "@/helpers/getGreetingTime"
 import Filter from "./Filter"
 import axios from "axios"
-import { UserData } from "@/types"
+import { UserData, UserProfile } from "@/types"
 import { ProfileImage } from "@/features/profile"
 import Slider from "./Slider"
 import { serverSession } from "@/lib/auth/serverSession"
@@ -26,7 +26,7 @@ async function HomePage() {
     (res) => {
       return res.data
     }
-  )) as UserData[]
+  )) as UserProfile[]
 
   const filteredUsers = users.filter((user) => user._id !== session?.user.id)
 
@@ -47,7 +47,7 @@ async function HomePage() {
         </div>
       </header>
 
-      <section className="pt-5 pb-14">
+      <section className="pt-10 pb-20">
         <Slider users={filteredUsers} />
       </section>
     </>

@@ -3,19 +3,29 @@ import { LilCard } from "@/client/components/Cards"
 import Text from "@/client/components/Typography/Text"
 import { useMediaQuery } from "@/client/hooks/useMediaQuery"
 import { calculateAge } from "@/helpers/CalculateAge"
-import { UserData } from "@/types"
+import { UserProfile } from "@/types"
+import { useFilterUsersStore } from "@/zustand/store"
 import { Carousel } from "@mantine/carousel"
 import { rem } from "@mantine/core"
 import Image from "next/image"
 import Link from "next/link"
 
-function Slider({ users }: { users: UserData[] }) {
+function Slider({ users }: { users: UserProfile[] }) {
   const matches = useMediaQuery("(min-width: 768px)")
+  const filter = useFilterUsersStore((state) => state.filterUsers)
 
-  //   console.log(users)
+  const filteredUsers = users.filter((user) => {
+    const isMatchGender = user.gender == filter.gender
+    const isAgeInRange =
+      calculateAge(user.birthday) >= filter.age[0] &&
+      calculateAge(user.birthday) <= filter.age[1]
+    // const isLocationMatch = user === 'New York';
+
+    return isMatchGender && isAgeInRange
+  })
 
   return (
-    <div className="absolute top-24 left-1/2 -translate-x-1/2 w-full px-5 max-w-lg">
+    <div className="absolute top-24 left-1/2 -translate-x-1/2 w-full px-5 max-w-lg pt-10 pb-24">
       <Carousel
         slideSize={!matches ? "100%" : "75%"}
         height={!matches ? 500 : 400}
@@ -40,58 +50,111 @@ function Slider({ users }: { users: UserData[] }) {
           },
         }}
       >
-        {users?.map((user, index) => (
-          <Carousel.Slide key={index}>
-            <Link href={`/profile/${user.userName}`}>
-              <div className=" min-w-screen h-[31.25rem] lg:h-[25rem] relative overflow-hidden ">
-                {user.image === "" ? (
-                  <div className="flex items-center justify-center h-full">
-                    No Image
-                  </div>
-                ) : (
-                  <Image
-                    src={`${user.image}`}
-                    alt={"image" + index}
-                    fill
-                    className="object-fill rounded-3xl"
-                  />
-                )}
-
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-48 bg-gradient-to-t from-pri_btn to-pri_btn/20 opacity-40 blur" />
-
-                <div className="absolute bottom-16 left-0 w-full flex items-center justify-between px-5">
-                  {/* info */}
-                  <div className="flex gap-3 flex-col">
-                    <div className="flex items-center gap-3">
-                      <Text
-                        content={user.name}
-                        font="bold"
-                        size="xl"
-                        extraStyle="text-white"
+        {filteredUsers.length == 0
+          ? users?.map((user, index) => (
+              <Carousel.Slide key={index}>
+                <Link href={`/profile/${user.userName}`}>
+                  <div className=" min-w-screen h-[31.25rem] lg:h-[25rem] relative overflow-hidden ">
+                    {user.image === "" ? (
+                      <div className="flex items-center justify-center h-full">
+                        No Image
+                      </div>
+                    ) : (
+                      <Image
+                        src={`${user.image}`}
+                        alt={"image" + index}
+                        fill
+                        className="object-fill rounded-3xl"
                       />
-                      <Text
-                        content={`${calculateAge(user.birthday)}`}
-                        font="bold"
-                        size="xl"
-                        extraStyle="text-white"
-                      />
+                    )}
+
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-48 bg-gradient-to-t from-pri_btn to-pri_btn/20 opacity-40 blur" />
+
+                    <div className="absolute bottom-16 left-0 w-full flex items-center justify-between px-5">
+                      {/* info */}
+                      <div className="flex gap-3 flex-col">
+                        <div className="flex items-center gap-3">
+                          <Text
+                            content={user.name}
+                            font="bold"
+                            size="xl"
+                            extraStyle="text-white"
+                          />
+                          <Text
+                            content={`${calculateAge(user.birthday)}`}
+                            font="bold"
+                            size="xl"
+                            extraStyle="text-white"
+                          />
+                        </div>
+
+                        <Text
+                          content={user.occupation}
+                          size="sm"
+                          font="medium"
+                          extraStyle="text-white"
+                        />
+                      </div>
+
+                      {/* disance */}
+                      <LilCard content="2km" variant="filled" />
                     </div>
-
-                    <Text
-                      content={user.occupation}
-                      size="sm"
-                      font="medium"
-                      extraStyle="text-white"
-                    />
                   </div>
+                </Link>
+              </Carousel.Slide>
+            ))
+          : filteredUsers?.map((user, index) => (
+              <Carousel.Slide key={index}>
+                <Link href={`/profile/${user.userName}`}>
+                  <div className=" min-w-screen h-[31.25rem] lg:h-[25rem] relative overflow-hidden ">
+                    {user.image === "" ? (
+                      <div className="flex items-center justify-center h-full">
+                        No Image
+                      </div>
+                    ) : (
+                      <Image
+                        src={`${user.image}`}
+                        alt={"image" + index}
+                        fill
+                        className="object-fill rounded-3xl"
+                      />
+                    )}
 
-                  {/* disance */}
-                  <LilCard content="2km" variant="filled" />
-                </div>
-              </div>
-            </Link>
-          </Carousel.Slide>
-        ))}
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-48 bg-gradient-to-t from-pri_btn to-pri_btn/20 opacity-40 blur" />
+
+                    <div className="absolute bottom-16 left-0 w-full flex items-center justify-between px-5">
+                      {/* info */}
+                      <div className="flex gap-3 flex-col">
+                        <div className="flex items-center gap-3">
+                          <Text
+                            content={user.name}
+                            font="bold"
+                            size="xl"
+                            extraStyle="text-white"
+                          />
+                          <Text
+                            content={`${calculateAge(user.birthday)}`}
+                            font="bold"
+                            size="xl"
+                            extraStyle="text-white"
+                          />
+                        </div>
+
+                        <Text
+                          content={user.occupation}
+                          size="sm"
+                          font="medium"
+                          extraStyle="text-white"
+                        />
+                      </div>
+
+                      {/* disance */}
+                      <LilCard content="2km" variant="filled" />
+                    </div>
+                  </div>
+                </Link>
+              </Carousel.Slide>
+            ))}
 
         {/* ...slides */}
       </Carousel>

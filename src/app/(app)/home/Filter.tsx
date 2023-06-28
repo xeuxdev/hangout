@@ -5,11 +5,25 @@ import { AnimatePresence, motion } from "framer-motion"
 import { FilterIcon } from "@/client/components/Icons"
 import ClickAwayListener from "react-click-away-listener"
 import { RangeSlider, Select } from "@mantine/core"
+import { useFilterUsersStore } from "@/zustand/store"
 
 function Filter() {
   const [showFilter, setShowFilter] = useState(false)
-  const [selectedGender, setSelectedGender] = useState("random")
+  const [selectedGender, setSelectedGender] = useState<
+    "male" | "female" | "random"
+  >("random")
   const [ageRange, setAgeRange] = useState<[number, number]>([18, 80])
+
+  const setFilters = useFilterUsersStore((state) => state.setFilters)
+  const resetFilters = useFilterUsersStore((state) => state.resetFilters)
+
+  const setUsersFilters = () => {
+    setFilters({
+      age: ageRange,
+      gender: selectedGender,
+      // location: "",
+    })
+  }
 
   return (
     <>
@@ -63,6 +77,7 @@ function Filter() {
                       content={gender}
                       variant={gender === selectedGender ? "filled" : "empty"}
                       onClick={() => {
+                        // @ts-ignore
                         setSelectedGender(gender)
                       }}
                       extraStyle="px-3 h-9"
@@ -85,12 +100,13 @@ function Filter() {
                   styles={{
                     bar: { backgroundColor: "#AF48FF" },
                   }}
+                  min={18}
                 />
               </div>
 
               {/* location */}
 
-              <div className="space-y-3">
+              {/* <div className="space-y-3">
                 <header className="text-xl text-primary_dark dark:text-primary font-bold select-none">
                   Location
                 </header>
@@ -111,7 +127,7 @@ function Filter() {
                     }}
                   />
                 </div>
-              </div>
+              </div> */}
 
               <div className="flex items-center gap-5">
                 <Button
@@ -120,6 +136,9 @@ function Filter() {
                   extraStyle="h-11 px-3"
                   onClick={() => {
                     setShowFilter(false)
+                    resetFilters()
+                    setSelectedGender("random")
+                    setAgeRange([18, 80])
                     // console.log("clicked")
                   }}
                 />
@@ -129,6 +148,7 @@ function Filter() {
                   extraStyle="h-11 px-3"
                   onClick={() => {
                     setShowFilter(false)
+                    setUsersFilters()
                   }}
                 />
               </div>

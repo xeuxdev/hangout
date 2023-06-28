@@ -22,7 +22,7 @@ async function MatchPage() {
 
   const filteredUsers = users.filter((user) => user._id !== session?.user.id)
   return (
-    <>
+    <section className="max-w-lg mx-auto">
       <div className="flex items-center justify-between">
         <NavHeader content="Match" />
         <div className="-mt-10">
@@ -54,7 +54,7 @@ async function MatchPage() {
 
         <YourMatchSlider users={filteredUsers} />
       </section>
-    </>
+    </section>
   )
 }
 
