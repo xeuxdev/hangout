@@ -19,7 +19,7 @@ function Filter() {
       >
         <FilterIcon />
         {showFilter && (
-          <div className="absolute top-0 left-0 w-full h-full opacity-50 bg-primary_dark" />
+          <div className="absolute top-0 left-0 w-full h-full opacity-50 bg-primary_dark z-40" />
         )}
       </div>
 
