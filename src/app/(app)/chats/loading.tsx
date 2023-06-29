@@ -1,6 +1,5 @@
 import { SearchIcon } from "@/client/components/Icons"
 import NavHeader from "@/client/components/Navigation/NavHeader"
-import Skeleton from "react-loading-skeleton"
 
 function ChatsLoader() {
   return (
@@ -21,11 +20,9 @@ function ChatsLoader() {
           {Array(50)
             .fill(0)
             .map((_, idx) => (
-              <Skeleton
+              <div
                 key={idx}
-                height={80}
-                width={80}
-                className="rounded-full "
+                className="w-[5rem] h-[5rem] rounded-full bg-gray-400 dark:bg-gray-600 animate-pulse"
               />
             ))}
         </div>
@@ -35,15 +32,18 @@ function ChatsLoader() {
         {Array(20)
           .fill(0)
           .map((_, idx) => (
-            <div className="flex items-center justify-between" key={idx}>
+            <div
+              className="flex items-center justify-between h-[3.75rem] w-full"
+              key={idx}
+            >
               {/*  */}
-              <div className="flex items-center gap-4">
-                <Skeleton height={50} width={50} className="rounded-full" />
+              <div className="flex items-center gap-4 w-full">
+                <div className="w-[3.75rem] h-[3.75rem] rounded-full bg-gray-400 dark:bg-gray-600 animate-pulse" />
 
                 <div className="space-y-1">
-                  <Skeleton height={20} width={200} />
+                  <div className="w-56 h-7 rounded-md bg-gray-400 dark:bg-gray-600 animate-pulse" />
 
-                  <Skeleton height={10} width={200} />
+                  <div className="w-20 h-4 rounded-md bg-gray-400 dark:bg-gray-600 animate-pulse" />
                 </div>
               </div>
             </div>

@@ -1,6 +1,4 @@
-import { SearchIcon } from "@/client/components/Icons"
 import NavHeader from "@/client/components/Navigation/NavHeader"
-import React from "react"
 
 function AllActiveLoader() {
   return (

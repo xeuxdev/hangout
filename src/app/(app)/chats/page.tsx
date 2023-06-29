@@ -2,10 +2,9 @@ import { SearchIcon } from "@/client/components/Icons"
 import NavHeader from "@/client/components/Navigation/NavHeader"
 import Text from "@/client/components/Typography/Text"
 import { NowActive } from "@/features/chats"
-import { UserData } from "@/types"
+import { getData } from "@/utils/api/request"
 import Image from "next/image"
 import Link from "next/link"
-import { Suspense } from "react"
 
 export const metadata = {
   title: "Chats",
@@ -13,11 +12,10 @@ export const metadata = {
 }
 
 async function Chats() {
-  const users = (await fetch("https://randomuser.me/api/?results=50").then(
-    (res) => {
-      return res.json()
-    }
-  )) as { results: any[] }
+  const users = (await getData({
+    route: "https://randomuser.me/api/?results=50",
+    method: "GET",
+  })) as { results: any[] }
 
   // console.log(users)
 
