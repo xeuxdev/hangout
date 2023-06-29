@@ -2,6 +2,9 @@
 import { Button } from "@/client/components/Buttons"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
+import { useTheme } from "next-themes"
+import Image from "next/image"
+import { motion } from "framer-motion"
 
 const texts = [
   "It's easy to find a soul mate nearby & around you",
@@ -17,6 +20,7 @@ function Slides({
   setActiveSlide: React.Dispatch<React.SetStateAction<number>>
 }) {
   const router = useRouter()
+  const { theme } = useTheme()
 
   useEffect(() => {
     if (activeSlide == 2) return
@@ -32,12 +36,29 @@ function Slides({
     }
   }, [activeSlide, setActiveSlide])
 
+  console.log(activeSlide)
+
   return (
-    <div className="w-full max-w-lg px-5 text-center">
+    <div className="w-full max-w-lg px-5 text-center pb-10">
       {/* images */}
 
       {/* text */}
       <div className="mb-10">
+        <motion.div
+          className="w-full h-96 relative"
+          initial={{
+            opacity: 0,
+            scale: 0,
+          }}
+          animate={{ opacity: 1, scale: 1, transition: { duration: 0.4 } }}
+        >
+          <Image
+            src={`/onboarding/${theme}_Slide_${activeSlide}.png`}
+            alt={"image" + activeSlide}
+            fill
+            className="duration-300"
+          />
+        </motion.div>
         <p className="text-primary_dark dark:text-primary font-semibold text-3xl px-5">
           {texts[activeSlide]}
         </p>
@@ -46,12 +67,12 @@ function Slides({
       {/* slide indicator */}
 
       <div className="flex items-center justify-center gap-1 mb-11">
-        {Array.from([3, 3, 3])
+        {Array(3)
           .fill(0)
           .map((_, i) => (
             <div
               key={i}
-              className={`h-1.5 rounded-full ${
+              className={`h-1.5 rounded-full duration-300 ${
                 activeSlide == i ? "bg-purple-600 w-5" : "bg-gray_1 w-1"
               }`}
             />
@@ -63,10 +84,11 @@ function Slides({
         content="Next"
         variant="filled"
         onClick={() => {
-          setActiveSlide((prev) => prev + 1)
           if (activeSlide == 2) {
             router.push("/auth")
+            return
           }
+          setActiveSlide((prev) => prev + 1)
         }}
       />
     </div>
