@@ -3,6 +3,7 @@ import Text from "@/client/components/Typography/Text"
 import { serverSession } from "@/lib/auth/serverSession"
 import { getFilteredUsers } from "@/utils/api/services"
 import Image from "next/image"
+import Link from "next/link"
 import React from "react"
 
 export const metadata = {
@@ -20,7 +21,11 @@ async function AllActivePage() {
 
       <section className="mt-10 space-y-6 pb-20">
         {users.map((user, idx) => (
-          <div className="flex items-center justify-between" key={user.name}>
+          <Link
+            href={`/chats/${user._id}`}
+            className="flex items-center justify-between"
+            key={user.name}
+          >
             <div className="flex items-center gap-4">
               <div className="relative w-[3.75rem] h-[3.75rem]">
                 <Image
@@ -37,7 +42,7 @@ async function AllActivePage() {
                 <Text content="hey there" size="xs" font="normal" />
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </section>
     </>
