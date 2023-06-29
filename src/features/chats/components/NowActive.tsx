@@ -1,6 +1,7 @@
+import { UserProfile } from "@/types"
 import Image from "next/image"
 
-function NowActive({ users }: { users: any[] }) {
+function NowActive({ users }: { users: UserProfile[] }) {
   // console.log(users)
   return (
     <div className="flex items-center gap-3 overflow-x-scroll">
@@ -8,10 +9,10 @@ function NowActive({ users }: { users: any[] }) {
         // <Carousel.Slide key={index}>
         <div key={index}>
           {/* <Link href={`/profile/${user.name}`}> */}
-          <div className="h-20 w-20 relative">
+          <div className="h-16 w-16 relative">
             <Image
-              src={`${user.picture.thumbnail}`}
-              alt={"image" + index}
+              src={`${user.image}`}
+              alt={user.name + " image"}
               fill
               className="rounded-full"
             />

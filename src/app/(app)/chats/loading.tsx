@@ -15,20 +15,20 @@ function ChatsLoader() {
         <header className="flex items-center justify-between mb-6">
           <h1 className="font-bold text-lg">Now Active</h1>
         </header>
-
-        <div className="flex items-center gap-4">
-          {Array(50)
-            .fill(0)
-            .map((_, idx) => (
-              <div
-                key={idx}
-                className="w-[5rem] h-[5rem] rounded-full bg-gray-400 dark:bg-gray-600 animate-pulse"
-              />
-            ))}
-        </div>
       </section>
 
-      <section className="mt-10 space-y-3 pb-20">
+      <div className="flex items-center gap-4 ml-2">
+        {Array(5)
+          .fill(0)
+          .map((_, idx) => (
+            <div
+              key={idx}
+              className="w-[3.5rem] h-[3.5rem] rounded-full bg-gray-400 dark:bg-gray-600 animate-pulse"
+            />
+          ))}
+      </div>
+
+      <section className="mt-10 space-y-6 pb-20">
         {Array(20)
           .fill(0)
           .map((_, idx) => (

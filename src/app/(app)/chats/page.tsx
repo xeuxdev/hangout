@@ -2,7 +2,8 @@ import { SearchIcon } from "@/client/components/Icons"
 import NavHeader from "@/client/components/Navigation/NavHeader"
 import Text from "@/client/components/Typography/Text"
 import { NowActive } from "@/features/chats"
-import { getData } from "@/utils/api/request"
+import { serverSession } from "@/lib/auth/serverSession"
+import { getFilteredUsers } from "@/utils/api/services"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -12,10 +13,9 @@ export const metadata = {
 }
 
 async function Chats() {
-  const users = (await getData({
-    route: "https://randomuser.me/api/?results=50",
-    method: "GET",
-  })) as { results: any[] }
+  const session = await serverSession()
+
+  const users = await getFilteredUsers(session?.user.id)
 
   // console.log(users)
 
@@ -37,33 +37,26 @@ async function Chats() {
           </Link>
         </header>
 
-        <NowActive users={users.results} />
+        <NowActive users={users} />
       </section>
 
       {/* chats */}
 
-      <section className="mt-10 space-y-3 pb-20">
-        {users.results.map((user, idx) => (
-          <div
-            className="flex items-center justify-between"
-            key={user.name.first + user.name.last}
-          >
-            {/*  */}
+      <section className="mt-10 space-y-6 pb-20">
+        {users.map((user, idx) => (
+          <div className="flex items-center justify-between" key={user.name}>
             <div className="flex items-center gap-4">
-              <Image
-                src={user.picture.thumbnail}
-                alt={user.name.first}
-                width={60}
-                height={60}
-                className="rounded-full"
-              />
+              <div className="relative w-[3.75rem] h-[3.75rem]">
+                <Image
+                  src={user.image}
+                  alt={user.name + " image"}
+                  fill
+                  className="rounded-full"
+                />
+              </div>
 
               <div className="space-y-1">
-                <Text
-                  content={`${user.name.first}  ${user.name.last}`}
-                  size="lg"
-                  font="semibold"
-                />
+                <Text content={`${user.name}`} size="lg" font="semibold" />
 
                 <Text content="hey there" size="xs" font="normal" />
               </div>
