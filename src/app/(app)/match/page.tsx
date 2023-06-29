@@ -2,25 +2,21 @@ import { SearchIcon } from "@/client/components/Icons"
 import NavHeader from "@/client/components/Navigation/NavHeader"
 import React from "react"
 import Slider from "./Slider"
-import axios from "axios"
-import { UserData } from "@/types"
 import { serverSession } from "@/lib/auth/serverSession"
 import Link from "next/link"
 import YourMatchSlider from "@/features/match/components/YourMatchSlider"
+import { getFilteredUsers } from "@/utils/api/services"
 
 export const metadata = {
   title: "find matches",
+  description: "find people that match you",
 }
+
 async function MatchPage() {
   const session = await serverSession()
 
-  const users = (await axios(`${process.env.FRONTEND_URL}/api/users/all`).then(
-    (res) => {
-      return res.data
-    }
-  )) as UserData[]
+  const filteredUsers = await getFilteredUsers(session?.user.id)
 
-  const filteredUsers = users.filter((user) => user._id !== session?.user.id)
   return (
     <section className="max-w-lg mx-auto">
       <div className="flex items-center justify-between">

@@ -2,20 +2,12 @@ import { SearchIcon } from "@/client/components/Icons"
 import NavHeader from "@/client/components/Navigation/NavHeader"
 import { NewMatchCard } from "@/features/match"
 import { serverSession } from "@/lib/auth/serverSession"
-import { UserData } from "@/types"
-import axios from "axios"
-import React from "react"
+import { getFilteredUsers } from "@/utils/api/services"
 
 async function SeeAllMatch() {
   const session = await serverSession()
 
-  const users = (await axios(`${process.env.FRONTEND_URL}/api/users/all`).then(
-    (res) => {
-      return res.data
-    }
-  )) as UserData[]
-
-  const filteredUsers = users.filter((user) => user._id !== session?.user.id)
+  const filteredUsers = await getFilteredUsers(session?.user.id)
 
   return (
     <>

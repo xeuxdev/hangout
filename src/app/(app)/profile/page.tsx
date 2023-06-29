@@ -2,9 +2,9 @@ import ChevronRight from "@/client/components/Icons/ChevronRight"
 import ThemeToggle from "./ThemeToggle"
 import Link from "next/link"
 import LogOut from "./LogOut"
-import { UserData } from "@/types"
 import { ProfileImage } from "@/features/profile"
 import { serverSession } from "@/lib/auth/serverSession"
+import { getUserData } from "@/utils/api/services"
 
 export async function generateMetadata() {
   const session = await serverSession()
@@ -16,11 +16,7 @@ export async function generateMetadata() {
 async function ProfilePage() {
   const session = await serverSession()
 
-  const userData = (await fetch(
-    `${process.env.FRONTEND_URL}/api/users/${session?.user.userName}`
-  ).then((response) => {
-    return response.json()
-  })) as UserData
+  const userData = await getUserData(session?.user.userName)
 
   return (
     <div className="max-w-lg mx-auto pb-20">

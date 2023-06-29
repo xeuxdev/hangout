@@ -1,7 +1,7 @@
 import Image from "next/image"
 
 function NowActive({ users }: { users: any[] }) {
-  console.log(users)
+  // console.log(users)
   return (
     <div className="flex items-center gap-3 overflow-x-scroll">
       {users.slice(0, 4)?.map((user, index) => (
