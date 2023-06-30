@@ -22,7 +22,7 @@ function Info({ userData }: { userData: UserData }) {
       transition={{ duration: 0.3 }}
     >
       <div
-        className="absolute top-5 left-1/2 mx-auto w-7 h-1 bg-pri_btn cursor-pointer"
+        className="absolute top-5 left-1/2 -translate-x-1/2 mx-auto w-7 h-1 bg-pri_btn cursor-pointer"
         onClick={() => {
           height === "auto" ? setHeight("40") : setHeight("auto")
         }}

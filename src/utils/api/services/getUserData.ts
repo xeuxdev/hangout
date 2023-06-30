@@ -1,12 +1,13 @@
 import { UserData } from "@/types"
-import axios from "axios"
 
 export async function getUserData(
   userName: string | undefined
 ): Promise<UserData> {
-  const response = await axios(
+  const response = await fetch(
     `${process.env.FRONTEND_URL}/api/users/${userName}`
-  )
+  ).then((response) => {
+    return response.json()
+  })
 
-  return response.data as UserData
+  return response as UserData
 }

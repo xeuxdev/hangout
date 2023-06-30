@@ -1,7 +1,7 @@
 import BackButton from "@/client/components/Buttons/BackButton"
 import { ImageSlider, Info } from "@/features/profile"
 import { serverSession } from "@/lib/auth/serverSession"
-import { UserData } from "@/types"
+import { getUserData, getUserImages } from "@/utils/api/services"
 import { Suspense } from "react"
 
 export async function generateMetadata() {
@@ -15,17 +15,9 @@ export async function generateMetadata() {
 async function MyProfilePage() {
   const session = await serverSession()
 
-  const userData = (await fetch(
-    `${process.env.FRONTEND_URL}/api/users/${session?.user.userName}`
-  ).then((response) => {
-    return response.json()
-  })) as UserData
+  const userData = await getUserData(session?.user.userName)
 
-  const imgData = (await fetch(
-    `${process.env.FRONTEND_URL}/api/users/profile/${session?.user.userName}/images`
-  ).then((response) => {
-    return response.json()
-  })) as { images: string[] }
+  const imgData = await getUserImages(session?.user.userName)
 
   // const imgData = (await img.data) as { images: string[] }
 

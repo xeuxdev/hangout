@@ -1,12 +1,11 @@
 import { UserProfile } from "@/types"
-import axios from "axios"
 
 export async function getFilteredUsers(
   userId: string | undefined
 ): Promise<UserProfile[]> {
-  const users = (await axios(`${process.env.FRONTEND_URL}/api/users/all`).then(
+  const users = (await fetch(`${process.env.FRONTEND_URL}/api/users/all`).then(
     (res) => {
-      return res.data
+      return res.json()
     }
   )) as UserProfile[]
 

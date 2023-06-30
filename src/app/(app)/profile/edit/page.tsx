@@ -6,29 +6,19 @@ import {
   EditProfile,
   EditProfileImage,
 } from "@/features/profile"
-import { authOptions } from "@/lib/auth/authOptions"
-import { UserData } from "@/types"
-import axios from "axios"
-import { getServerSession } from "next-auth"
+import { serverSession } from "@/lib/auth/serverSession"
+import { getUserData, getUserImages } from "@/utils/api/services"
 import { Suspense } from "react"
 
 export const metadata = {
   title: "Edit Profile",
 }
 async function EditProfilePage() {
-  const session = await getServerSession(authOptions)
+  const session = await serverSession()
 
-  const res = await axios(
-    `${process.env.FRONTEND_URL}/api/users/${session?.user?.userName}`
-  )
+  const userData = await getUserData(session?.user.userName)
 
-  const userData = res.data as UserData
-
-  const img = await axios(
-    `${process.env.FRONTEND_URL}/api/users/profile/${session?.user.userName}/images`
-  )
-
-  const imgData = (await img.data) as { images: string[] }
+  const imgData = await getUserImages(session?.user.userName)
 
   return (
     <>
