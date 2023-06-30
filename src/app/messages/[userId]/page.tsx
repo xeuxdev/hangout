@@ -1,10 +1,4 @@
-import {
-  ChatHeader,
-  ChatInput,
-  ReceiverMessage,
-  SenderMessage,
-  fetchUserData,
-} from "@/features/chats"
+import { ChatHeader, ChatsContainer, fetchUserData } from "@/features/chats"
 
 export async function generateMetadata({
   params,
@@ -27,14 +21,7 @@ async function MessagesPage({ params }: { params: { userId: string } }) {
       <ChatHeader user_name={userData.name} />
       {/* {<p>{params.userId}</p>} */}
 
-      <section className="pt-12 pb-16 flex flex-col w-full gap-5">
-        <SenderMessage message="Hey man what's up" />
-        <ReceiverMessage message="Hey man what's up" />
-      </section>
-
-      {/* inputs */}
-
-      <ChatInput />
+      <ChatsContainer />
     </div>
   )
 }

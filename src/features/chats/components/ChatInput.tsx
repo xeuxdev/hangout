@@ -1,6 +1,8 @@
 "use client"
 
+import { useMessagesStore } from "@/zustand/message.store"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useSession } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
@@ -13,6 +15,8 @@ const messageSchema = z.object({
 })
 
 function ChatInput() {
+  const setMessage = useMessagesStore((state) => state.setNewMessage)
+  const { data: session } = useSession()
   const {
     handleSubmit,
     formState: { errors },
@@ -23,7 +27,12 @@ function ChatInput() {
   })
 
   const onsubmit = ({ message }: MessageType) => {
-    console.log(message)
+    // console.log(message)
+    setMessage({
+      message: message,
+      owner: session?.user.id,
+      time: `${new Date().getTime()}`,
+    })
     reset({ message: "" })
   }
 
@@ -35,6 +44,7 @@ function ChatInput() {
             type="text"
             {...register("message")}
             className="w-full h-full text-primary_dark dark:text-primary tracking-wide bg-input_bg_light dark:bg-input_bg_dark rounded-xl caret-primary_dark dark:caret-primary px-5 outline-pri_btn"
+            placeholder="enter message..."
           />
 
           <button type="submit" disabled={!!errors.message}>
