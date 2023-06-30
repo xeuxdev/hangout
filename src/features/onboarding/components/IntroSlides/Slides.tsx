@@ -36,7 +36,7 @@ function Slides({
     }
   }, [activeSlide, setActiveSlide])
 
-  console.log(activeSlide)
+  // console.log(activeSlide)
 
   return (
     <div className="w-full max-w-lg px-5 text-center pb-10">

@@ -5,6 +5,7 @@ import LogOut from "./LogOut"
 import { ProfileImage } from "@/features/profile"
 import { serverSession } from "@/lib/auth/serverSession"
 import { getUserData } from "@/utils/api/services"
+import InstallButton from "./InstallButton"
 
 export async function generateMetadata() {
   const session = await serverSession()
@@ -64,6 +65,8 @@ async function ProfilePage() {
 
         {/* dark mode */}
         <ThemeToggle />
+
+        <InstallButton />
 
         {/* help center */}
         <Link href="/help" className="flex items-center justify-between">
