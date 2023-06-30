@@ -44,7 +44,7 @@ function Slides({
 
       {/* text */}
       <div className="mb-10">
-        <motion.div
+        {/* <motion.div
           className="w-full h-96 relative"
           initial={{
             opacity: 0,
@@ -58,7 +58,7 @@ function Slides({
             fill
             className="duration-300"
           />
-        </motion.div>
+        </motion.div> */}
         <p className="text-primary_dark dark:text-primary font-semibold text-3xl px-5">
           {texts[activeSlide]}
         </p>
