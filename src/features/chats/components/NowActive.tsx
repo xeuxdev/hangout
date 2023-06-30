@@ -7,7 +7,7 @@ function NowActive({ users }: { users: UserProfile[] }) {
   return (
     <div className="flex items-center gap-3 overflow-x-scroll">
       {users.slice(0, 4)?.map((user, index) => (
-        <Link href={`/chats/${user._id}`} key={index}>
+        <Link href={`/messages/${user._id}`} key={index}>
           <div className="h-16 w-16 relative">
             <Image
               src={`${user.image}`}

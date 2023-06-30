@@ -22,6 +22,8 @@ module.exports = {
         input_bg_dark: "#1F222A",
         input_bg_light: "#FAFAFA",
         input_bg_light2: "#F5F5F5",
+        msg_receiver_dark: "#35383F",
+        msg_receiver_light: "#F5F5F5",
 
         // colors
         gray_1: "#E0E0E0",

@@ -45,7 +45,7 @@ async function Chats() {
       <section className="mt-10 space-y-6 pb-20">
         {users.map((user, idx) => (
           <Link
-            href={`/chats/${user._id}`}
+            href={`/messages/${user._id}`}
             className="flex items-center justify-between"
             key={user.name}
           >
