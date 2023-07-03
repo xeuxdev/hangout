@@ -8,14 +8,18 @@ import Image from "next/image"
 import { SubmitButton } from "@/client/components/Buttons"
 import { useSession } from "next-auth/react"
 import { editProfileImage } from "../../services/editProfileImage"
+import { useRouter } from "next/navigation"
 
 function EditProfileImage({ userData }: { userData: UserData }) {
   const { data: session } = useSession()
   const [showEditProfile, setShowEditProfile] = useState(false)
   const [profileImageInput, setProfileImageInput] = useState("")
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setIsLoading(true)
 
     const payload = {
       profileImage: profileImageInput,
@@ -27,6 +31,8 @@ function EditProfileImage({ userData }: { userData: UserData }) {
 
     await editProfileImage(payload).then(() => {
       setShowEditProfile(false)
+      router.refresh()
+      setIsLoading(false)
     })
   }
 
@@ -57,7 +63,7 @@ function EditProfileImage({ userData }: { userData: UserData }) {
               <div className="w-40 h-40 rounded-full mx-auto relative mb-10">
                 {/* if user wants to upload new pic preview is handled here */}
                 {profileImageInput !== "" ? (
-                  <div className="w-full h-full rounded-full overflow-hidden relative mx-auto">
+                  <div className="w-40 h-40 rounded-full overflow-hidden relative mx-auto">
                     <Image
                       src={`${URL.createObjectURL(
                         profileImageInput as unknown as Blob | MediaSource
@@ -68,7 +74,7 @@ function EditProfileImage({ userData }: { userData: UserData }) {
                     />
                   </div>
                 ) : (
-                  <ProfileImage userData={userData} width={200} />
+                  <ProfileImage userData={userData} width={160} />
                 )}
                 {/* for profile update */}
                 <div className="absolute -bottom-2 right-5 bg-white w-10 h-10 rounded-full grid place-items-center z-20">
@@ -91,7 +97,10 @@ function EditProfileImage({ userData }: { userData: UserData }) {
                 </div>
               </div>
 
-              <SubmitButton content="Done" variant="empty" />
+              <SubmitButton
+                content={isLoading ? "Saving..." : "Save"}
+                variant="empty"
+              />
             </form>
           </>
         </Modal>

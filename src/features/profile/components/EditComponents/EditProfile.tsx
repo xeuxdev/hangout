@@ -11,9 +11,11 @@ import { EditProfileType } from "../../types"
 import { useMutation } from "@tanstack/react-query"
 import { editProfile } from "../../services/editProfile"
 import { toast } from "react-hot-toast"
+import { useRouter } from "next/navigation"
 
 function EditProfile({ userData }: { userData: UserData }) {
   const [showEditProfile, setShowEditProfile] = useState(false)
+  const router = useRouter()
 
   const {
     handleSubmit,
@@ -29,13 +31,13 @@ function EditProfile({ userData }: { userData: UserData }) {
     },
   })
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isLoading } = useMutation({
     mutationKey: ["edit-profile"],
     mutationFn: editProfile,
   })
 
   const onsubmit = (values: EditProfileType) => {
-    console.log(values)
+    // console.log(values)
 
     const payload = {
       userId: userData._id,
@@ -53,6 +55,10 @@ function EditProfile({ userData }: { userData: UserData }) {
       })
       .catch((err) => {
         err && toast.error(err.response.data.message)
+      })
+      .finally(() => {
+        setShowEditProfile(false)
+        router.refresh()
       })
   }
 
@@ -151,7 +157,10 @@ function EditProfile({ userData }: { userData: UserData }) {
             />
             <p className="text-xs text-red-500">{errors.occupation?.message}</p>
           </div>
-          <SubmitButton content="Update" variant="filled" />
+          <SubmitButton
+            content={isLoading ? "updating..." : "Update"}
+            variant="filled"
+          />
         </form>
       </Modal>
     </>

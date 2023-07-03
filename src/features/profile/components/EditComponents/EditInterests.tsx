@@ -8,6 +8,7 @@ import { useMutation } from "@tanstack/react-query"
 import React, { useState } from "react"
 import { toast } from "react-hot-toast"
 import { editInterests } from "../../services/editInterests"
+import { useRouter } from "next/navigation"
 
 function findIndices(array1: string[], array2: string[]) {
   return array1.map(function (element) {
@@ -20,10 +21,11 @@ function EditInterests({ userData }: { userData: UserData }) {
   const [selectedInterests, setSelectedInterests] = useState<number[]>(
     findIndices(userData.interests, interests)
   )
+  const router = useRouter()
 
   // console.log(selectedInterests)
 
-  const { mutateAsync, error } = useMutation({
+  const { mutateAsync, error, isLoading } = useMutation({
     mutationKey: ["edit-Interests"],
     mutationFn: editInterests,
   })
@@ -50,6 +52,9 @@ function EditInterests({ userData }: { userData: UserData }) {
       })
       .catch((err) => {
         error && toast.error(err.response.data.message)
+      })
+      .finally(() => {
+        router.refresh()
       })
   }
 
@@ -104,7 +109,7 @@ function EditInterests({ userData }: { userData: UserData }) {
         </div>
 
         <Button
-          content="Save Interests"
+          content={isLoading ? "Saving..." : "Save Interests"}
           variant="filled"
           onClick={handleSubmit}
         />

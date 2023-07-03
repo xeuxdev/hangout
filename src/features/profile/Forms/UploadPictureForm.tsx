@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react"
 import { uploadImage } from "../services/uploadImage"
 import { toast } from "react-hot-toast"
 import { CyclicLoader } from "@/client/components/UiElements"
+import { useRouter } from "next/navigation"
 
 type ImageType = {
   image: string
@@ -17,6 +18,7 @@ function UploadPictureForm() {
   const { data: session } = useSession()
   const [imagePreview, setImagePreview] = useState<File>()
   const [isUploading, setIsUploading] = useState(false)
+  const router = useRouter()
 
   const {
     register,
@@ -47,6 +49,7 @@ function UploadPictureForm() {
       })
       .finally(() => {
         setIsUploading(false)
+        router.refresh()
       })
   }
 
