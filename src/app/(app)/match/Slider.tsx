@@ -1,6 +1,5 @@
 "use client"
 import Text from "@/client/components/Typography/Text"
-import { useMediaQuery } from "@/client/hooks/useMediaQuery"
 import { calculateAge } from "@/helpers/CalculateAge"
 import { UserData } from "@/types"
 import { Carousel } from "@mantine/carousel"
@@ -8,12 +7,10 @@ import Image from "next/image"
 import Link from "next/link"
 
 function Slider({ users }: { users: UserData[] }) {
-  const matches = useMediaQuery("(min-width: 768px)")
-
   //   console.log(users)
 
   return (
-    <Carousel slideSize="50%" height={350} slideGap="md" withControls={false}>
+    <Carousel slideSize="25%" height={350} slideGap="sm" withControls={false}>
       {users?.map((user, index) => (
         <Carousel.Slide key={index}>
           <Link href={`/profile/${user.userName}`}>

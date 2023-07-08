@@ -3,10 +3,15 @@ import { Button } from "@/client/components/Buttons"
 import { signOut } from "next-auth/react"
 import React, { useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
+import { useMediaQuery } from "@/client/hooks/useMediaQuery"
 
 function LogOut() {
   const [showLogOut, setShowLogOut] = useState(false)
+  const matches = useMediaQuery("(min-width: 768px)")
 
+  if (matches) {
+    return null
+  }
   return (
     <>
       <div

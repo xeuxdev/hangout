@@ -40,7 +40,7 @@ function MatchPopUp({
           />
         </div>
 
-        <section className=" flex justify-center items-center flex-col gap-8">
+        <section className=" flex justify-center items-center flex-col gap-8 max-w-sm mx-auto">
           <Text
             content="It's a match"
             font="bold"

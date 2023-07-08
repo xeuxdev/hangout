@@ -12,10 +12,12 @@ import { useMutation } from "@tanstack/react-query"
 import { editProfile } from "../../services/editProfile"
 import { toast } from "react-hot-toast"
 import { useRouter } from "next/navigation"
+import { useTheme } from "next-themes"
 
 function EditProfile({ userData }: { userData: UserData }) {
   const [showEditProfile, setShowEditProfile] = useState(false)
   const router = useRouter()
+  const { theme } = useTheme()
 
   const {
     handleSubmit,
@@ -62,6 +64,10 @@ function EditProfile({ userData }: { userData: UserData }) {
       })
   }
 
+  const style = {
+    background: theme == "dark" ? "#181A20" : "hsl(0, 0%, 100%)",
+  }
+
   return (
     <>
       <div className="flex items-center justify-between">
@@ -94,6 +100,19 @@ function EditProfile({ userData }: { userData: UserData }) {
         onClose={() => setShowEditProfile(false)}
         title="Edit Profile"
         centered
+        styles={{
+          header: {
+            backgroundColor: style.background,
+            color: theme == "dark" ? "hsl(0,0%,85%)" : "hsl(0, 0%, 8%)",
+          },
+          body: {
+            backgroundColor: style.background,
+            color: theme == "dark" ? "hsl(0,0%,85%)" : "hsl(0, 0%, 8%)",
+          },
+          close: {
+            color: theme == "dark" ? "#fff" : "#000",
+          },
+        }}
       >
         <form className="space-y-4" onSubmit={handleSubmit(onsubmit)}>
           {/* name */}

@@ -9,6 +9,7 @@ import React, { useState } from "react"
 import { toast } from "react-hot-toast"
 import { editInterests } from "../../services/editInterests"
 import { useRouter } from "next/navigation"
+import { useTheme } from "next-themes"
 
 function findIndices(array1: string[], array2: string[]) {
   return array1.map(function (element) {
@@ -22,6 +23,7 @@ function EditInterests({ userData }: { userData: UserData }) {
     findIndices(userData.interests, interests)
   )
   const router = useRouter()
+  const { theme } = useTheme()
 
   // console.log(selectedInterests)
 
@@ -58,6 +60,10 @@ function EditInterests({ userData }: { userData: UserData }) {
       })
   }
 
+  const style = {
+    background: theme == "dark" ? "#181A20" : "hsl(0, 0%, 100%)",
+  }
+
   return (
     <>
       <div className="flex items-center justify-between">
@@ -71,7 +77,7 @@ function EditInterests({ userData }: { userData: UserData }) {
         {userData.interests.map((interest) => (
           <div
             key={interest}
-            className={`px-4 py-1 rounded-full w-fit font-medium bg-pri_btn`}
+            className={`px-4 py-1 rounded-full w-fit font-medium bg-pri_btn text-primary`}
           >
             {interest}
           </div>
@@ -83,8 +89,21 @@ function EditInterests({ userData }: { userData: UserData }) {
         onClose={() => setShowEditInterestsModal(false)}
         title="Edit Interests"
         centered
+        styles={{
+          header: {
+            backgroundColor: style.background,
+            color: theme == "dark" ? "hsl(0,0%,85%)" : "hsl(0, 0%, 8%)",
+          },
+          body: {
+            backgroundColor: style.background,
+            color: theme == "dark" ? "hsl(0,0%,85%)" : "hsl(0, 0%, 8%)",
+          },
+          close: {
+            color: theme == "dark" ? "#fff" : "#000",
+          },
+        }}
       >
-        <div className="flex flex-wrap gap-7 my-5">
+        <div className="flex flex-wrap gap-7 py-5">
           {interests.map((interest, index) => (
             <button
               key={interest + index}

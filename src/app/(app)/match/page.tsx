@@ -22,7 +22,7 @@ async function MatchPage() {
   const filteredUsersByAlgo = DetermineYourMatch(filteredUsers, UserData)
 
   return (
-    <section className="max-w-lg mx-auto">
+    <section className="">
       <div className="flex items-center justify-between">
         <NavHeader content="Match" />
         <div className="-mt-10">
