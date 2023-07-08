@@ -28,7 +28,7 @@ async function EditProfilePage() {
         <h1 className="font-semibold text-xl">Edit Profile</h1>
       </header>
 
-      <div className="space-y-7 pb-20">
+      <div className="space-y-7 pb-20 max-w-xl mx-auto">
         <>
           <EditProfileImage userData={userData} />
         </>

@@ -14,7 +14,13 @@ function YourMatchSlider({ users }: { users: UserData[] }) {
 
   return (
     <>
-      <Carousel slideSize="50%" height={350} slideGap="md" withControls={false}>
+      <Carousel
+        slideSize="25%"
+        height={350}
+        slideGap="md"
+        withControls={false}
+        className="cursor-pointer"
+      >
         {users?.map((user, index) => (
           <Carousel.Slide key={index}>
             {/* <Link href={`/profile/${user.userName}`}> */}

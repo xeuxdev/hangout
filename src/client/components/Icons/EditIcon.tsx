@@ -9,7 +9,7 @@ function EditIcon({ route }: { route?: string }) {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 512 512"
       width={20}
-      className="fill-pri_btn"
+      className="fill-pri_btn cursor-pointer"
       onClick={() => {
         if (route === undefined || route === "" || route === "undefined") return
 
