@@ -6,7 +6,13 @@ import { useState } from "react"
 import { AnimatePresence } from "framer-motion"
 import MatchPopUp from "./MatchPopUp"
 
-function YourMatchSlider({ users }: { users: UserData[] }) {
+function YourMatchSlider({
+  users,
+  userData,
+}: {
+  users: UserData[]
+  userData: UserData
+}) {
   const [showMatchPopUp, setShowMatchPopUp] = useState(false)
   const [selectedUser, setSelectedUser] = useState({} as UserData)
 
@@ -44,6 +50,7 @@ function YourMatchSlider({ users }: { users: UserData[] }) {
           <MatchPopUp
             setShowMatchPopUp={setShowMatchPopUp}
             user={selectedUser}
+            you={userData}
           />
         )}
       </AnimatePresence>

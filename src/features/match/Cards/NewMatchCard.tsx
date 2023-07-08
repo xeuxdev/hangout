@@ -2,11 +2,12 @@ import Text from "@/client/components/Typography/Text"
 import { calculateAge } from "@/helpers/CalculateAge"
 import { UserData } from "@/types"
 import Image from "next/image"
+import Link from "next/link"
 import React from "react"
 
 function NewMatchCard({ user }: { user: UserData }) {
   return (
-    <>
+    <Link href={`/profile/${user.userName}`}>
       <div className="max-w-[14rem] w-full h-[19rem] relative overflow-hidden">
         <Image
           src={`${user.image}`}
@@ -33,7 +34,7 @@ function NewMatchCard({ user }: { user: UserData }) {
           </div>
         </div>
       </div>
-    </>
+    </Link>
   )
 }
 

@@ -5,18 +5,23 @@ import { UserData } from "@/types"
 import Match from "./Match"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
+import { DetermineMatchPercentage } from "@/algorithm/match-algo/match-percentage"
 
 function MatchPopUp({
   setShowMatchPopUp,
   user,
+  you,
 }: {
   setShowMatchPopUp: React.Dispatch<React.SetStateAction<boolean>>
   user: UserData
+  you: UserData
 }) {
   //   console.log(user)
 
   const { data: session } = useSession()
   const router = useRouter()
+
+  const matchPercentage = DetermineMatchPercentage(user, you)
 
   return (
     <>
@@ -37,6 +42,7 @@ function MatchPopUp({
             imgUrl={user.image}
             imgUrl2={session?.user.image as string}
             icon={"/assets/love.svg"}
+            matchPercentage={matchPercentage}
           />
         </div>
 

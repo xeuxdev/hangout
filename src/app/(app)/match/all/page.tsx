@@ -18,7 +18,7 @@ async function SeeAllMatch() {
         </div>
       </div>
 
-      <section className="grid grid-cols-2 lg:grid-cols-3 gap-3 ">
+      <section className="grid grid-cols-2 lg:grid-cols-3 gap-3 pb-20 ">
         {filteredUsers.map((user) => (
           <NewMatchCard user={user} key={user._id} />
         ))}
