@@ -4,10 +4,12 @@ const Match = ({
   imgUrl,
   imgUrl2,
   icon,
+  matchPercentage,
 }: {
   imgUrl: string
   imgUrl2: string
   icon: string
+  matchPercentage: number
 }) => {
   return (
     <div className="flex items-center relative">
@@ -36,7 +38,9 @@ const Match = ({
       <div className="absolute top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2">
         <div className="w-20 h-20 rounded-full bg-white -ml-5 grid place-items-center">
           <div className="h-12 w-12 rounded-full ring-8 border-pri_btn grid place-items-center">
-            <p className="text-xs text-primary_dark font-semibold">100%</p>
+            <p className="text-xs text-primary_dark font-semibold">
+              {matchPercentage}%
+            </p>
           </div>
         </div>
       </div>
