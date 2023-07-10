@@ -34,7 +34,7 @@ async function HomePage() {
         </div>
       </header>
 
-      <section className="pt-10 pb-20">
+      <section className="pt-10 pb-20 xl:py-40">
         <Slider users={filteredUsers} />
       </section>
     </>

@@ -32,15 +32,17 @@ async function PeepsProfilePage({ params }: { params: { username: string } }) {
         <BackButton />
       </header>
 
-      <div>
-        <Suspense fallback={<div>loading.....</div>}>
-          <ImageSlider images={imgData.images} />
-        </Suspense>
-      </div>
+      <section className="lg:flex lg:relative lg:h-[80vh] lg:w-full">
+        <>
+          <Suspense fallback={<div>loading.....</div>}>
+            <ImageSlider images={imgData.images} />
+          </Suspense>
+        </>
 
-      {/* info */}
+        {/* info */}
 
-      {userData && <Info userData={userData} />}
+        {userData && <Info userData={userData} />}
+      </section>
     </>
   )
 }

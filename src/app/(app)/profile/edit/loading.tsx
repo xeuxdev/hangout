@@ -9,7 +9,7 @@ function EditPageLoader() {
         <h1 className="font-semibold text-xl">Edit Profile</h1>
       </header>
 
-      <div className="space-y-7 pb-20">
+      <div className="space-y-7 pb-20  max-w-xl mx-auto">
         {/* your profile image */}
         <section>
           <h1 className="font-semibold text-xl mb-5">Your Profile Image</h1>

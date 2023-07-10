@@ -1,6 +1,6 @@
 import BackButton from "@/client/components/Buttons/BackButton"
 
-export default function Loading() {
+function ProfileLoader() {
   return (
     <>
       <header className="relative z-20">
@@ -19,3 +19,5 @@ export default function Loading() {
     </>
   )
 }
+
+export default ProfileLoader
