@@ -18,7 +18,7 @@ function ChatsContainer() {
 
   return (
     <section className="pt-12 pb-16">
-      <div className=" flex flex-col w-full gap-5">
+      <div className=" flex flex-col w-full gap-5 lg:px-5">
         {messages.map((message) =>
           message.owner == session?.user.id
             ? message.message != "" && (

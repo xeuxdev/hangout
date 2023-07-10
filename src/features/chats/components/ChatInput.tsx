@@ -37,13 +37,13 @@ function ChatInput() {
   }
 
   return (
-    <div className="fixed bottom-5 left-0 w-full">
+    <div className="fixed bottom-5 lg:bottom-0 lg:pb-4 left-1/2 -translate-x-1/2 w-full max-w-xl bg-primary dark:bg-primary_dark">
       <form onSubmit={handleSubmit(onsubmit)}>
         <div className="w-full h-14 px-5 relative ">
           <input
             type="text"
             {...register("message")}
-            className="w-full h-full text-primary_dark dark:text-primary tracking-wide bg-input_bg_light dark:bg-input_bg_dark rounded-xl caret-primary_dark dark:caret-primary px-5 outline-pri_btn"
+            className="w-full h-full text-primary_dark dark:text-primary tracking-wide bg-input_bg_light dark:bg-input_bg_dark rounded-xl caret-primary_dark dark:caret-primary px-5 outline-pri_btn ring-1 ring-gray-950/10"
             placeholder="enter message..."
           />
 

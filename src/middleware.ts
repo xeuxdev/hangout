@@ -8,5 +8,6 @@ export const config = {
     "/match/:path*",
     "/chats/:path*",
     "/settings/:path*",
+    "/messages/:path*",
   ],
 }

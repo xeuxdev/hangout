@@ -5,7 +5,7 @@ function AllActiveLoader() {
     <>
       <NavHeader content="All Active" />
 
-      <section className="mt-10 space-y-6 pb-20">
+      <section className="mt-10 space-y-6 pb-20 mx-auto max-w-xl">
         {Array(20)
           .fill(0)
           .map((_, idx) => (

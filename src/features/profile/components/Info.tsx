@@ -8,16 +8,18 @@ import { EditIcon } from "@/client/components/Icons"
 import { useSession } from "next-auth/react"
 import { Button } from "@/client/components/Buttons"
 import { LilCard } from "@/client/components/Cards"
+import { useMediaQuery } from "@/client/hooks/useMediaQuery"
 
 function Info({ userData }: { userData: UserData }) {
   const { data: session } = useSession()
   const [height, setHeight] = useState<"auto" | "40">("auto")
+  const matches = useMediaQuery("(min-width: 768px)")
 
   return (
     <motion.div
-      className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-${height} max-w-lg px-5 pt-10 pb-3 rounded-t-3xl bg-primary dark:bg-primary_dark overflow-y-scroll z-50 duration-300  scrollbar-none `}
+      className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-${height} max-w-lg lg:bottom-1/2 lg:translate-y-1/2 lg:right-0 lg:min-h-[20.5rem] lg:-translate-x-0  px-5 pt-10 pb-3 rounded-t-3xl bg-primary dark:bg-primary_dark overflow-y-scroll z-50 duration-300  scrollbar-none `}
       animate={{
-        height: height == "40" ? "auto" : 160,
+        height: !matches && height == "40" ? "auto" : 160,
       }}
       transition={{ duration: 0.3 }}
     >

@@ -16,13 +16,13 @@ async function AllActivePage() {
   const users = await getFilteredUsers(session?.user.id)
 
   return (
-    <>
+    <section className=" mx-auto max-w-xl">
       <NavHeader content="All Active" />
 
       <section className="mt-10 space-y-6 pb-20">
         {users.map((user, idx) => (
           <Link
-            href={`/chats/${user._id}`}
+            href={`/messages/${user._id}`}
             className="flex items-center justify-between"
             key={user.name}
           >
@@ -45,7 +45,7 @@ async function AllActivePage() {
           </Link>
         ))}
       </section>
-    </>
+    </section>
   )
 }
 

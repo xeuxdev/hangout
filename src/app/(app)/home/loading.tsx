@@ -18,7 +18,7 @@ function HomeLoader() {
         </div>
       </header>
 
-      <section className="pt-10 pb-20">
+      <section className="pt-10 pb-20  xl:py-40">
         <div className="w-full max-w-md mx-auto h-[31.25rem] lg:h-[25rem] rounded-3xl bg-gray-400 dark:bg-gray-600 animate-pulse" />
       </section>
     </>
