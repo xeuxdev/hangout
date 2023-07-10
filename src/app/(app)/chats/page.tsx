@@ -20,7 +20,7 @@ async function Chats() {
   // console.log(users)
 
   return (
-    <>
+    <section className="max-w-xl mx-auto">
       <div className="flex items-center justify-between">
         <NavHeader content="Chats" />
         <div className="-mt-10">
@@ -68,7 +68,7 @@ async function Chats() {
           </Link>
         ))}
       </section>
-    </>
+    </section>
   )
 }
 

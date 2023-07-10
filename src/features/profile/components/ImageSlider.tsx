@@ -10,7 +10,7 @@ function ImageSlider({ images }: { images: String[] }) {
   // console.log(images)
 
   return (
-    <div className="absolute top-0 left-1/2 -translate-x-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:left-20 lg:-translate-x-0 w-full max-w-lg ">
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:left-20 lg:-translate-x-0 w-full max-w-lg select-none ">
       <Carousel
         slideSize={!matches ? "100%" : "75%"}
         height={!matches ? 500 : 400}

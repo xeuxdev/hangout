@@ -21,7 +21,7 @@ function EditPageLoader() {
 
         {/* your best photos */}
 
-        <div>
+        <div className="mb-5">
           <h3 className="font-semibold text-xl mb-5">Your Best Photos</h3>
           {Array(2)
             .fill(0)
@@ -35,7 +35,7 @@ function EditPageLoader() {
 
         {/* interests */}
 
-        <div className="flex items-center justify-between mt-10">
+        <div className="flex flex-col items-center justify-between mt-10">
           <h4 className="font-semibold text-xl mb-5">Your Interests</h4>
 
           <div className="flex items-center flex-wrap gap-4">
@@ -60,7 +60,7 @@ function EditPageLoader() {
             .fill(0)
             .map((_, idx) => (
               <div
-                className="h-12 w-56 rounded-full bg-gray-400 dark:bg-gray-600 animate-pulse"
+                className="h-12 w-full rounded-full bg-gray-400 dark:bg-gray-600 animate-pulse"
                 key={idx}
               />
             ))}

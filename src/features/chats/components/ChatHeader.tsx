@@ -24,9 +24,9 @@ function ChatHeader({ user_name }: { user_name: string }) {
 
   return (
     <div
-      className={`top-0 lg:top-6 left-1/2 -translate-x-1/2 w-full mb-5 duration-300 ${
+      className={`top-0 left-1/2 -translate-x-1/2 w-full mb-5 duration-300 ${
         showBg
-          ? "fixed max-w-xl bg-input_bg_light dark:bg-input_bg_dark py-6 px-5"
+          ? "fixed max-w-xl bg-input_bg_light dark:bg-input_bg_dark py-6 px-5 rounded-b-xl"
           : "absolute"
       }`}
     >
