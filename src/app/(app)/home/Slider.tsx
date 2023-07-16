@@ -11,7 +11,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 function Slider({ users }: { users: UserProfile[] }) {
-  const matches = useMediaQuery("(min-width: 768px)")
+  const mobile = useMediaQuery("(max-width: 768px)")
   const filter = useFilterUsersStore((state) => state.filterUsers)
 
   const filteredUsers = users.filter((user) => {
@@ -26,10 +26,13 @@ function Slider({ users }: { users: UserProfile[] }) {
 
   return (
     <Carousel
-      slideSize={!matches ? "100%" : "75%"}
-      height={!matches ? 500 : 400}
-      slideGap="md"
+      slideSize={"50%"}
+      height={mobile ? 440 : 700}
+      slidesToScroll={mobile ? 1 : 3}
+      breakpoints={[{ maxWidth: "sm", slideSize: "100%", slideGap: 40 }]}
+      slideGap="lg"
       loop
+      dragFree
       withControls={false}
       withIndicators
       styles={{
@@ -48,7 +51,7 @@ function Slider({ users }: { users: UserProfile[] }) {
           },
         },
         viewport: {
-          maxWidth: 600,
+          maxWidth: 800,
           marginInline: "auto",
         },
       }}
@@ -71,11 +74,11 @@ function Slider({ users }: { users: UserProfile[] }) {
                     />
                   )}
 
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-48 bg-gradient-to-t from-pri_btn to-pri_btn/20 opacity-40 blur" />
+                  <div className="absolute bottom-0 w-full h-48 -translate-x-1/2 left-1/2 bg-gradient-to-t from-pri_btn to-pri_btn/20 opacity-40 blur" />
 
-                  <div className="absolute bottom-16 left-0 w-full flex items-center justify-between px-5">
+                  <div className="absolute left-0 flex items-center justify-between w-full px-5 bottom-16">
                     {/* info */}
-                    <div className="flex gap-3 flex-col">
+                    <div className="flex flex-col gap-3">
                       <div className="flex items-center gap-3">
                         <Text
                           content={user.name}
@@ -123,11 +126,11 @@ function Slider({ users }: { users: UserProfile[] }) {
                     />
                   )}
 
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-48 bg-gradient-to-t from-pri_btn to-pri_btn/20 opacity-40 blur" />
+                  <div className="absolute bottom-0 w-full h-48 -translate-x-1/2 left-1/2 bg-gradient-to-t from-pri_btn to-pri_btn/20 opacity-40 blur" />
 
-                  <div className="absolute bottom-16 left-0 w-full flex items-center justify-between px-5">
+                  <div className="absolute left-0 flex items-center justify-between w-full px-5 bottom-16">
                     {/* info */}
-                    <div className="flex gap-3 flex-col">
+                    <div className="flex flex-col gap-3">
                       <div className="flex items-center gap-3">
                         <Text
                           content={user.name}

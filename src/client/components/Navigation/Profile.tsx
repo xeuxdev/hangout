@@ -27,10 +27,10 @@ const Profile = () => {
   return (
     <>
       <ClickAwayListener onClickAway={handleClickAway}>
-        <div className="flex items-center relative">
+        <div className="relative flex items-center">
           <button
             type="button"
-            className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 relative w-8 h-8 overflow-hidden"
+            className="relative flex w-8 h-8 mr-3 overflow-hidden text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
             id="user-menu-button"
             aria-expanded="false"
             data-dropdown-toggle="user-dropdown"
@@ -46,12 +46,12 @@ const Profile = () => {
                 alt={user.userName + "profile image"}
                 width={32}
                 height={32}
-                className="rounded-full object-cover"
+                className="object-cover rounded-full"
               />
             ) : (
-              <div className="w-8 h-8 relative">
+              <div className="relative w-8 h-8">
                 <Image
-                  className="rounded-full object-cover"
+                  className="object-cover rounded-full"
                   fill
                   src={`${user.image}`}
                   alt={`${user?.userName} avatar`}
@@ -62,12 +62,12 @@ const Profile = () => {
           {/* <!-- Dropdown menu --> */}
           <div className="hidden lg:flex">
             <div
-              className="z-50 hidden my-4 text-base list-none bg-background_light dark:bg-background divide-y divide-gray-100 rounded shadow-xl dark:divide-gray-600 absolute top-7 -right-10 pl-2 pr-7"
+              className="absolute z-50 hidden pl-2 my-4 text-base list-none divide-y divide-gray-100 rounded shadow-xl bg-background_light dark:bg-background dark:divide-gray-600 top-7 -right-10 pr-7"
               id="user-dropdown"
               ref={dropdownRef}
             >
               <Link href={"/home"} className="px-4 py-3">
-                <span className="block text-sm text-gray-900 dark:text-white capitalize">
+                <span className="block text-sm text-gray-900 capitalize dark:text-white">
                   {user?.userName}
                 </span>
                 <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
@@ -80,7 +80,7 @@ const Profile = () => {
                   <li key={link}>
                     <Link
                       href={`/${link}`}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white cursor-pointer capitalize"
+                      className="block px-4 py-2 text-sm text-gray-700 capitalize cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
                       {link}
                     </Link>
@@ -89,7 +89,7 @@ const Profile = () => {
                 {/* logout */}
                 <li
                   onClick={() => signOut({ callbackUrl: "/auth/signin" })}
-                  className="block px-4 py-2 text-sm text-red-500 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-red-400 dark:hover:text-white cursor-pointer"
+                  className="block px-4 py-2 text-sm text-red-500 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-red-400 dark:hover:text-white"
                 >
                   Log out
                 </li>
