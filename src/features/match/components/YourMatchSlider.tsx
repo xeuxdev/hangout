@@ -1,10 +1,15 @@
 "use client"
 import { UserData } from "@/types"
-import { Carousel } from "@mantine/carousel"
 import YourMatchCard from "../Cards/YourMatchCard"
 import { useState } from "react"
 import { AnimatePresence } from "framer-motion"
 import MatchPopUp from "./MatchPopUp"
+
+import { Swiper, SwiperSlide } from "swiper/react"
+
+// Import Swiper styles
+import "swiper/css"
+import "swiper/css/effect-coverflow"
 
 function YourMatchSlider({
   users,
@@ -20,30 +25,37 @@ function YourMatchSlider({
 
   return (
     <>
-      <Carousel
-        slideSize="25%"
+      <Swiper
+        spaceBetween={50}
+        slidesPerView={1.5}
         height={350}
-        slideGap="md"
-        withControls={false}
-        className="cursor-pointer"
+        // onSlideChange={() => console.log("slide change")}
+        // onSwiper={(swiper) => console.log(swiper)}
+        // loopPreventsSliding
+        effect="coverflow"
       >
         {users?.map((user, index) => (
-          <Carousel.Slide key={index}>
+          <SwiperSlide
+            key={user._id}
+            onClick={() => {
+              setSelectedUser(user)
+              setShowMatchPopUp(true)
+            }}
+          >
             {/* <Link href={`/profile/${user.userName}`}> */}
-            <div
+            {/* <div
               onClick={() => {
                 setSelectedUser(user)
                 setShowMatchPopUp(true)
               }}
-            >
-              <YourMatchCard user={user} />
-            </div>
+              > */}
+            <YourMatchCard user={user} />
+            {/* </div> */}
 
             {/* </Link> */}
-          </Carousel.Slide>
+          </SwiperSlide>
         ))}
-        {/* ...slides */}
-      </Carousel>
+      </Swiper>
 
       <AnimatePresence mode="wait" onExitComplete={() => null} initial={false}>
         {showMatchPopUp && (
