@@ -33,7 +33,7 @@ async function MatchPage() {
       {/* new match */}
       <section className="">
         <header className="flex items-center justify-between mb-6">
-          <h1 className="font-bold text-lg">New Match</h1>
+          <h1 className="text-lg font-bold">New Match</h1>
           <Link href={"/match/all"} className="text-pri_btn">
             See All
           </Link>
@@ -44,15 +44,15 @@ async function MatchPage() {
 
       {/* your match */}
 
-      <section className="pb-20 relative">
+      <section className="relative pb-20">
         <header className="flex items-center justify-between mb-6">
-          <h2 className="font-bold text-lg">Your Match</h2>
+          <h2 className="text-lg font-bold">Your Match</h2>
           {/* <Link href={"/match/your-match"} className="text-pri_btn">
             See All
           </Link> */}
         </header>
 
-        <YourMatchSlider users={filteredUsersByAlgo} userData={UserData} />
+        <YourMatchSlider users={filteredUsers} userData={UserData} />
       </section>
     </section>
   )

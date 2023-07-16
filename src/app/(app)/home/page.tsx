@@ -26,7 +26,7 @@ async function HomePage() {
 
           <div>
             <p className="">{getGreetingTime()}👋</p>
-            <h1 className="font-bold text-xl">{session?.user.name}</h1>
+            <h1 className="text-xl font-bold">{session?.user.name}</h1>
           </div>
         </div>
         <div>
@@ -34,7 +34,7 @@ async function HomePage() {
         </div>
       </header>
 
-      <section className="pt-10 pb-20 xl:py-40">
+      <section className="pt-10 pb-20 sm:pt-48 xl:py-40">
         <Slider users={filteredUsers} />
       </section>
     </>

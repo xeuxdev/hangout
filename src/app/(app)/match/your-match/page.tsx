@@ -16,7 +16,7 @@ async function YourMatchPage() {
   // console.log(filteredUsersByAlgo)
 
   return (
-    <section className="pb-20 max-w-lg mx-auto">
+    <section className="max-w-lg pb-20 mx-auto">
       <div className="flex items-center justify-between">
         <NavHeader content="Your Match" />
         <div className="-mt-10">
@@ -24,7 +24,7 @@ async function YourMatchPage() {
         </div>
       </div>
 
-      <section className="grid grid-cols-2 lg:grid-cols-3 gap-3 gap-y-10 ">
+      <section className="grid grid-cols-2 gap-3 lg:grid-cols-3 gap-y-10 ">
         {filteredUsersByAlgo.map((user) => (
           <NewMatchCard user={user} key={user._id} />
         ))}

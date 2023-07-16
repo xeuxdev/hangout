@@ -11,9 +11,9 @@ function Navigation() {
   const isChatsActive = pathname?.startsWith("/chats")
   const isProfileActive = pathname?.startsWith("/profile")
   return (
-    <div className="fixed bottom-0 left-0 w-full bg-primary dark:bg-primary_dark md:hidden">
-      <div className="px-5 py-3 w-full flex items-center justify-between">
-        <Link href={"/home"} className=" flex items-center flex-col gap-3">
+    <div className="fixed bottom-0 left-0 z-50 w-full bg-primary dark:bg-primary_dark lg:hidden">
+      <div className="flex items-center justify-between w-full px-5 py-3">
+        <Link href={"/home"} className="flex flex-col items-center gap-3 ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width={20}
@@ -37,7 +37,7 @@ function Navigation() {
           </p>
         </Link>
 
-        <Link href={"/match"} className=" flex items-center flex-col gap-3">
+        <Link href={"/match"} className="flex flex-col items-center gap-3 ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
@@ -61,7 +61,7 @@ function Navigation() {
           </p>
         </Link>
 
-        <Link href={"/chats"} className=" flex items-center flex-col gap-3">
+        <Link href={"/chats"} className="flex flex-col items-center gap-3 ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
@@ -85,7 +85,7 @@ function Navigation() {
           </p>
         </Link>
 
-        <Link href={"/profile"} className=" flex items-center flex-col gap-3">
+        <Link href={"/profile"} className="flex flex-col items-center gap-3 ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 448 512"
