@@ -1,9 +1,9 @@
 import { getGreetingTime } from "@/helpers/getGreetingTime"
 import Filter from "./Filter"
 import { ProfileImage } from "@/features/profile"
-import Slider from "./Slider"
 import { serverSession } from "@/lib/auth/serverSession"
 import { getFilteredUsers, getUserData } from "@/utils/api/services"
+import Carousel from "./Carousel"
 
 export const metadata = {
   title: "Home",
@@ -35,7 +35,8 @@ async function HomePage() {
       </header>
 
       <section className="pt-10 pb-20 sm:pt-48 xl:py-40">
-        <Slider users={filteredUsers} />
+        {/* <Slider users={filteredUsers} /> */}
+        <Carousel users={filteredUsers} />
       </section>
     </>
   )
