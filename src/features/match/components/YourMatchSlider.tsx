@@ -10,6 +10,7 @@ import { Swiper, SwiperSlide } from "swiper/react"
 // Import Swiper styles
 import "swiper/css"
 import "swiper/css/effect-coverflow"
+import { useMediaQuery } from "@/client/hooks/useMediaQuery"
 
 function YourMatchSlider({
   users,
@@ -20,6 +21,7 @@ function YourMatchSlider({
 }) {
   const [showMatchPopUp, setShowMatchPopUp] = useState(false)
   const [selectedUser, setSelectedUser] = useState({} as UserData)
+  const mobile = useMediaQuery("(max-width: 768px)")
 
   //   console.log(users)
 
@@ -27,7 +29,7 @@ function YourMatchSlider({
     <>
       <Swiper
         spaceBetween={50}
-        slidesPerView={1.5}
+        slidesPerView={mobile ? 1.5 : 3}
         height={350}
         // onSlideChange={() => console.log("slide change")}
         // onSwiper={(swiper) => console.log(swiper)}
@@ -42,17 +44,7 @@ function YourMatchSlider({
               setShowMatchPopUp(true)
             }}
           >
-            {/* <Link href={`/profile/${user.userName}`}> */}
-            {/* <div
-              onClick={() => {
-                setSelectedUser(user)
-                setShowMatchPopUp(true)
-              }}
-              > */}
             <YourMatchCard user={user} />
-            {/* </div> */}
-
-            {/* </Link> */}
           </SwiperSlide>
         ))}
       </Swiper>

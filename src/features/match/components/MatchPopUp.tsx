@@ -25,7 +25,7 @@ function MatchPopUp({
 
   return (
     <>
-      <div className="fixed inset-0 bg-primary dark:bg-primary_dark py-10 px-5">
+      <div className="fixed inset-0 z-50 px-5 py-10 bg-primary dark:bg-primary_dark">
         <button className="" onClick={() => setShowMatchPopUp(false)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ function MatchPopUp({
           </svg>
         </button>
 
-        <div className="flex justify-center items-center pb-10">
+        <div className="flex items-center justify-center pb-10">
           <Match
             imgUrl={user.image}
             imgUrl2={session?.user.image as string}
@@ -46,7 +46,7 @@ function MatchPopUp({
           />
         </div>
 
-        <section className=" flex justify-center items-center flex-col gap-8 max-w-sm mx-auto">
+        <section className="flex flex-col items-center justify-center max-w-sm gap-8 mx-auto ">
           <Text
             content="It's a match"
             font="bold"
@@ -59,7 +59,7 @@ function MatchPopUp({
             size="sm"
           />
 
-          <div className="space-y-4 w-full">
+          <div className="w-full space-y-4">
             <Button
               content="Say Hello"
               variant="filled"

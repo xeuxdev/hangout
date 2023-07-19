@@ -11,7 +11,7 @@ function Navigation() {
   const isChatsActive = pathname?.startsWith("/chats")
   const isProfileActive = pathname?.startsWith("/profile")
   return (
-    <div className="fixed bottom-0 left-0 z-50 w-full bg-primary dark:bg-primary_dark lg:hidden">
+    <div className="fixed bottom-0 left-0 z-40 w-full bg-primary dark:bg-primary_dark lg:hidden">
       <div className="flex items-center justify-between w-full px-5 py-3">
         <Link href={"/home"} className="flex flex-col items-center gap-3 ">
           <svg

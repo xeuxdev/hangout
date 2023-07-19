@@ -5,12 +5,16 @@ import { useMediaQuery } from "@/client/hooks/useMediaQuery"
 import { calculateAge } from "@/helpers/CalculateAge"
 import { UserProfile } from "@/types"
 import { useFilterUsersStore } from "@/zustand/store"
-import { Carousel } from "@mantine/carousel"
-import { rem } from "@mantine/core"
 import Image from "next/image"
 import Link from "next/link"
 
-function Slider({ users }: { users: UserProfile[] }) {
+import { Swiper, SwiperSlide } from "swiper/react"
+
+// Import Swiper styles
+import "swiper/css"
+import "swiper/css/effect-coverflow"
+
+function Carousel({ users }: { users: UserProfile[] }) {
   const mobile = useMediaQuery("(max-width: 768px)")
   const filter = useFilterUsersStore((state) => state.filterUsers)
 
@@ -25,40 +29,18 @@ function Slider({ users }: { users: UserProfile[] }) {
   })
 
   return (
-    <Carousel
-      slideSize={"50%"}
+    <Swiper
+      spaceBetween={mobile ? 30 : 50}
+      slidesPerView={mobile ? 1 : 3}
       height={mobile ? 440 : 700}
-      slidesToScroll={mobile ? 1 : 3}
-      breakpoints={[{ maxWidth: "sm", slideSize: "100%", slideGap: 40 }]}
-      slideGap="lg"
-      loop
-      dragFree
-      withControls={false}
-      withIndicators
-      styles={{
-        indicator: {
-          width: rem(12),
-          height: rem(4),
-          transition: "width 250ms ease",
-
-          "&[data-active]": {
-            width: rem(40),
-            backgroundColor: "#9610FF",
-          },
-          " :not([data-active])": {
-            backgroundColor: "#fff",
-            /* Styles for elements that do not have the attribute [data-active] */
-          },
-        },
-        viewport: {
-          maxWidth: 800,
-          marginInline: "auto",
-        },
-      }}
+      // onSlideChange={() => console.log("slide change")}
+      // onSwiper={(swiper) => console.log(swiper)}
+      // loopPreventsSliding
+      effect="coverflow"
     >
       {filteredUsers.length == 0
         ? users?.map((user, index) => (
-            <Carousel.Slide key={index}>
+            <SwiperSlide key={index}>
               <Link href={`/profile/${user.userName}`}>
                 <div className=" min-w-screen h-[31.25rem] lg:h-[25rem] relative overflow-hidden ">
                   {user.image === "" ? (
@@ -107,10 +89,10 @@ function Slider({ users }: { users: UserProfile[] }) {
                   </div>
                 </div>
               </Link>
-            </Carousel.Slide>
+            </SwiperSlide>
           ))
         : filteredUsers?.map((user, index) => (
-            <Carousel.Slide key={index}>
+            <SwiperSlide key={index}>
               <Link href={`/profile/${user.userName}`}>
                 <div className=" min-w-screen h-[31.25rem] lg:h-[25rem] relative overflow-hidden ">
                   {user.image === "" ? (
@@ -159,12 +141,12 @@ function Slider({ users }: { users: UserProfile[] }) {
                   </div>
                 </div>
               </Link>
-            </Carousel.Slide>
+            </SwiperSlide>
           ))}
 
       {/* ...slides */}
-    </Carousel>
+    </Swiper>
   )
 }
 
-export default Slider
+export default Carousel
