@@ -1,7 +1,6 @@
 import NavHeader from "@/client/components/Navigation/NavHeader"
 import { serverSession } from "@/lib/auth/serverSession"
 import { UserProfile } from "@/types"
-import { Suspense } from "react"
 
 export const metadata = {
   title: "Personal Information",
@@ -21,24 +20,24 @@ async function page() {
     <>
       <NavHeader content="Personal Information" />
 
-      <section className="mx-auto max-w-lg space-y-6 pb-14">
+      <section className="max-w-lg mx-auto space-y-6 pb-14">
         {/* <Suspense> */}
-        <div className="w-full bg-input_bg_light dark:bg-input_bg_dark p-6 rounded-xl">
+        <div className="w-full p-6 bg-input_bg_light dark:bg-input_bg_dark rounded-xl">
           {data.name}
         </div>
-        <div className="w-full bg-input_bg_light dark:bg-input_bg_dark p-6 rounded-xl">
+        <div className="w-full p-6 bg-input_bg_light dark:bg-input_bg_dark rounded-xl">
           {data.userName}
         </div>
-        <div className="w-full bg-input_bg_light dark:bg-input_bg_dark p-6 rounded-xl">
+        <div className="w-full p-6 bg-input_bg_light dark:bg-input_bg_dark rounded-xl">
           {data.email}
         </div>
-        <div className="w-full bg-input_bg_light dark:bg-input_bg_dark p-6 rounded-xl">
+        <div className="w-full p-6 bg-input_bg_light dark:bg-input_bg_dark rounded-xl">
           {data.birthday}
         </div>
-        <div className="w-full bg-input_bg_light dark:bg-input_bg_dark p-6 rounded-xl">
+        <div className="w-full p-6 bg-input_bg_light dark:bg-input_bg_dark rounded-xl">
           {data.gender}
         </div>
-        <div className="w-full bg-input_bg_light dark:bg-input_bg_dark p-6 rounded-xl">
+        <div className="w-full p-6 bg-input_bg_light dark:bg-input_bg_dark rounded-xl">
           {data.phone}
         </div>
         {/* </Suspense> */}

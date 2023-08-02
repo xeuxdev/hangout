@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import ChevronRight from "../../Icons/ChevronRight"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import ClickAwayListener from "react-click-away-listener"
 
 function DropDown({ options }: { options: string[] }) {
@@ -15,14 +15,14 @@ function DropDown({ options }: { options: string[] }) {
         setShowDropDown(false)
       }}
     >
-      <motion.div
+      <m.div
         className="flex items-center gap-5 cursor-pointer"
         initial={{ opacity: 0, x: 100 }}
         whileInView={{ opacity: 1, x: 0, transition: { duration: 0.8 } }}
         exit={{ opacity: 0, x: 100, transition: { duration: 0.2 } }}
       >
         <p
-          className="font-semibold capitalize text-lg select-none"
+          className="text-lg font-semibold capitalize select-none"
           onClick={() => setShowDropDown(true)}
         >
           {selectedOption}
@@ -30,7 +30,7 @@ function DropDown({ options }: { options: string[] }) {
         <ChevronRight />
 
         {showDropDown && (
-          <div className="absolute top-0 right-0 w-40 h-49 bg-input_bg_light dark:bg-input_bg_dark z-50 px-5 py-2 rounded-lg">
+          <div className="absolute top-0 right-0 z-50 w-40 px-5 py-2 rounded-lg h-49 bg-input_bg_light dark:bg-input_bg_dark">
             {options.map((option) => {
               return (
                 <p
@@ -39,7 +39,7 @@ function DropDown({ options }: { options: string[] }) {
                     setSelectedOption(option)
                     setShowDropDown(false)
                   }}
-                  className="hover:bg-input_bg_light2/40 hover:dark:bg-input_bg_dark/40 cursor-pointer font-semibold capitalize"
+                  className="font-semibold capitalize cursor-pointer hover:bg-input_bg_light2/40 hover:dark:bg-input_bg_dark/40"
                 >
                   {option}
                 </p>
@@ -47,7 +47,7 @@ function DropDown({ options }: { options: string[] }) {
             })}
           </div>
         )}
-      </motion.div>
+      </m.div>
     </ClickAwayListener>
   )
 }
