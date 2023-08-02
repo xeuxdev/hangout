@@ -5,8 +5,8 @@ import Slider from "./Slider"
 import { serverSession } from "@/lib/auth/serverSession"
 import Link from "next/link"
 import YourMatchSlider from "@/features/match/components/YourMatchSlider"
-import { getFilteredUsers, getUserData } from "@/utils/api/services"
-import { DetermineYourMatch } from "@/algorithm/match-algo/your-match"
+import { getUserData } from "@/utils/api/services"
+import { getMatches } from "@/features/match"
 
 export const metadata = {
   title: "find matches",
@@ -16,10 +16,9 @@ export const metadata = {
 async function MatchPage() {
   const session = await serverSession()
 
-  const filteredUsers = await getFilteredUsers(session?.user.id)
   const UserData = await getUserData(session?.user.userName)
 
-  const filteredUsersByAlgo = DetermineYourMatch(filteredUsers, UserData)
+  const matchData = await getMatches(session?.user.id)
 
   return (
     <section className="">
@@ -39,7 +38,7 @@ async function MatchPage() {
           </Link>
         </header>
 
-        <Slider users={filteredUsers} />
+        <Slider users={matchData} />
       </section>
 
       {/* your match */}
@@ -52,7 +51,7 @@ async function MatchPage() {
           </Link> */}
         </header>
 
-        <YourMatchSlider users={filteredUsers} userData={UserData} />
+        <YourMatchSlider users={matchData} userData={UserData} />
       </section>
     </section>
   )
