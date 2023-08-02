@@ -1,10 +1,10 @@
 "use client"
 import { Button } from "@/client/components/Buttons"
 import React, { useState } from "react"
-import { AnimatePresence, motion } from "framer-motion"
+import { AnimatePresence, m } from "framer-motion"
 import { FilterIcon } from "@/client/components/Icons"
 import ClickAwayListener from "react-click-away-listener"
-import { RangeSlider, Select } from "@mantine/core"
+import { RangeSlider } from "@mantine/core"
 import { useFilterUsersStore } from "@/zustand/store"
 
 function Filter() {
@@ -33,7 +33,7 @@ function Filter() {
       >
         <FilterIcon />
         {showFilter && (
-          <div className="absolute top-0 left-0 w-full h-full opacity-50 bg-primary_dark z-40" />
+          <div className="absolute top-0 left-0 z-40 w-full h-full opacity-50 bg-primary_dark" />
         )}
       </div>
 
@@ -44,8 +44,8 @@ function Filter() {
               setShowFilter(false)
             }}
           >
-            <motion.div
-              className="fixed bottom-0 left-0 lg:right-0 lg:left-auto w-full max-w-lg min-h-56 rounded-t-3xl z-50 bg-input_bg_light2 dark:bg-input_bg_dark px-5 py-10 space-y-5"
+            <m.div
+              className="fixed bottom-0 left-0 z-50 w-full max-w-lg px-5 py-10 space-y-5 lg:right-0 lg:left-auto min-h-56 rounded-t-3xl bg-input_bg_light2 dark:bg-input_bg_dark"
               initial={{ opacity: 0, y: 100 }}
               whileInView={{
                 opacity: 1,
@@ -60,13 +60,13 @@ function Filter() {
                 transition: { duration: 0.5 },
               }}
             >
-              <header className="text-xl text-primary_dark dark:text-primary font-bold text-center select-none">
+              <header className="text-xl font-bold text-center select-none text-primary_dark dark:text-primary">
                 Filter
               </header>
 
               {/* gender */}
               <div className="space-y-3">
-                <header className="text-xl text-primary_dark dark:text-primary font-bold select-none">
+                <header className="text-xl font-bold select-none text-primary_dark dark:text-primary">
                   Gender
                 </header>
 
@@ -89,7 +89,7 @@ function Filter() {
               {/* age */}
 
               <div className="">
-                <header className="text-xl text-primary_dark dark:text-primary font-bold pb-8 select-none">
+                <header className="pb-8 text-xl font-bold select-none text-primary_dark dark:text-primary">
                   Age
                 </header>
 
@@ -107,7 +107,7 @@ function Filter() {
               {/* location */}
 
               {/* <div className="space-y-3">
-                <header className="text-xl text-primary_dark dark:text-primary font-bold select-none">
+                <header className="text-xl font-bold select-none text-primary_dark dark:text-primary">
                   Location
                 </header>
 
@@ -152,7 +152,7 @@ function Filter() {
                   }}
                 />
               </div>
-            </motion.div>
+            </m.div>
           </ClickAwayListener>
         )}
       </AnimatePresence>

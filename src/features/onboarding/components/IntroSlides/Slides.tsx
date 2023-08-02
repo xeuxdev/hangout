@@ -3,8 +3,6 @@ import { Button } from "@/client/components/Buttons"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import { useTheme } from "next-themes"
-import Image from "next/image"
-import { motion } from "framer-motion"
 
 const texts = [
   "It's easy to find a soul mate nearby & around you",
@@ -39,13 +37,13 @@ function Slides({
   // console.log(activeSlide)
 
   return (
-    <div className="w-full max-w-lg px-5 text-center pb-10">
+    <div className="w-full max-w-lg px-5 pb-10 text-center">
       {/* images */}
 
       {/* text */}
       <div className="mb-10">
         {/* <motion.div
-          className="w-full h-96 relative"
+          className="relative w-full h-96"
           initial={{
             opacity: 0,
             scale: 0,
@@ -59,7 +57,7 @@ function Slides({
             className="duration-300"
           />
         </motion.div> */}
-        <p className="text-primary_dark dark:text-primary font-semibold text-3xl px-5">
+        <p className="px-5 text-3xl font-semibold text-primary_dark dark:text-primary">
           {texts[activeSlide]}
         </p>
       </div>

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { SkeletonTheme } from "react-loading-skeleton"
 import "react-loading-skeleton/dist/skeleton.css"
 const PwaUpdater = dynamic(() => import(`@/PWA/PwaUpdater`), { ssr: false })
+import { LazyMotion, domAnimation } from "framer-motion"
 
 function Providers({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false)
@@ -20,15 +21,18 @@ function Providers({ children }: { children: React.ReactNode }) {
   if (!mounted) {
     return null
   }
+
   return (
     <SessionProvider>
       <PwaUpdater />
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider attribute="class">
-          <SkeletonTheme baseColor="#E8E8E8" highlightColor="##E8E8E8">
-            {children}
-          </SkeletonTheme>
-        </ThemeProvider>
+        <LazyMotion features={domAnimation}>
+          <ThemeProvider attribute="class">
+            <SkeletonTheme baseColor="#E8E8E8" highlightColor="##E8E8E8">
+              {children}
+            </SkeletonTheme>
+          </ThemeProvider>
+        </LazyMotion>
       </QueryClientProvider>
     </SessionProvider>
   )

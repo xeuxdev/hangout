@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
 import Text from "../components/Typography/Text"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import Faq from "./Faq"
 import Support from "./Support"
 
@@ -13,7 +13,7 @@ function HelpCenter() {
       {/* change tabs */}
       <header className="flex items-center justify-around gap-5">
         {["faq", "support"].map((item, i) => (
-          <div className="relative w-full grid place-items-center" key={item}>
+          <div className="relative grid w-full place-items-center" key={item}>
             <Text
               content={item}
               size="lg"
@@ -22,7 +22,7 @@ function HelpCenter() {
               onClick={() => setActiveTab(i)}
             />
             {activeTab === i && (
-              <motion.span
+              <m.span
                 className={`absolute bottom-0 left-0 w-full h-1 bg-pri_btn`}
                 layoutId="activeTab"
                 transition={{
